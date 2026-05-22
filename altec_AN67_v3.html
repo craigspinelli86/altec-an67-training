@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Altec AN67-E100 — Field Mechanic Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0d0f10;
+  --dark: #141719;
+  --panel: #1c1f22;
+  --border: #2a2e33;
+  --accent: #f5a623;
+  --accent2: #4fc3f7;
+  --accent3: #81c784;
+  --danger: #ef5350;
+  --text: #dde1e6;
+  --muted: #8a9099;
+  --white: #f4f6f8;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { font-size:16px; }
+body { font-family:'IBM Plex Sans',sans-serif; background:var(--black); color:var(--text); min-height:100vh; overflow-x:hidden; }
+
+/* ── HEADER ── */
+header { background:var(--dark); border-bottom:2px solid var(--accent); padding:0 16px; display:flex; align-items:center; justify-content:space-between; height:56px; position:sticky; top:0; z-index:200; }
+.logo-main { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--accent); letter-spacing:2px; line-height:1; }
+.logo-sub { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.5px; display:none; }
+.progress-bar-wrap { display:flex; align-items:center; gap:8px; }
+.progress-label { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); white-space:nowrap; }
+.progress-track { width:80px; height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; background:var(--accent); border-radius:3px; transition:width 0.4s ease; width:0%; }
+.score-badge { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--accent3); white-space:nowrap; }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav { position:fixed; bottom:0; left:0; right:0; background:var(--dark); border-top:1px solid var(--border); display:flex; z-index:200; padding-bottom:env(safe-area-inset-bottom); overflow-x:auto; }
+.bnav-item { flex:0 0 auto; min-width:52px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:7px 6px; cursor:pointer; gap:3px; border-top:2px solid transparent; transition:all 0.15s; min-height:52px; }
+.bnav-item.active { border-top-color:var(--accent); background:rgba(245,166,35,0.08); }
+.bnav-item.completed .bnav-num { background:var(--accent3); color:var(--black); }
+.bnav-num { width:22px; height:22px; border-radius:50%; background:var(--border); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; color:var(--muted); transition:background 0.2s,color 0.2s; flex-shrink:0; }
+.bnav-item.active .bnav-num { background:var(--accent); color:var(--black); }
+.bnav-label { font-size:8px; color:var(--muted); text-align:center; line-height:1.2; max-width:52px; white-space:nowrap; }
+.bnav-item.active .bnav-label { color:var(--accent); }
+
+/* ── LAYOUT ── */
+.desktop-layout { display:block; }
+main { padding:20px 16px 100px; max-width:700px; margin:0 auto; }
+.module { display:none; animation:fadeIn 0.25s ease; }
+.module.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── MODULE HEADER ── */
+.module-tag { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.module-title { font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--white); letter-spacing:1px; line-height:1; margin-bottom:10px; }
+.module-desc { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:24px; line-height:1.6; font-weight:300; }
+.divider { height:1px; background:var(--border); margin:24px 0; }
+
+/* ── OBJECTIVES ── */
+.objectives-box { background:var(--panel); border:1px solid var(--border); border-left:4px solid var(--accent2); border-radius:4px; padding:16px; margin-bottom:24px; }
+.objectives-label { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--accent2); text-transform:uppercase; margin-bottom:10px; }
+.objectives-list { list-style:none; }
+.objectives-list li { font-size:14px; color:var(--text); padding:5px 0; display:flex; gap:10px; line-height:1.5; }
+.objectives-list li::before { content:"→"; color:var(--accent2); flex-shrink:0; font-family:'IBM Plex Mono',monospace; }
+
+/* ── TYPOGRAPHY ── */
+h2 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; color:var(--accent); margin:28px 0 10px; }
+h3 { font-size:15px; font-weight:600; color:var(--white); margin:18px 0 8px; }
+h4 { font-size:13px; font-weight:600; color:var(--accent2); margin:14px 0 6px; font-family:'IBM Plex Mono',monospace; letter-spacing:0.5px; text-transform:uppercase; }
+p { font-size:14px; line-height:1.75; color:var(--text); margin-bottom:12px; }
+strong { color:var(--white); }
+
+/* ── CALLOUTS ── */
+.callout { border-radius:4px; padding:14px 16px; margin:14px 0; border-left:4px solid; font-size:14px; line-height:1.65; }
+.callout-warn  { background:rgba(245,166,35,0.08); border-color:var(--accent); color:#f0c97a; }
+.callout-danger{ background:rgba(239,83,80,0.08);  border-color:var(--danger);  color:#f48a88; }
+.callout-info  { background:rgba(79,195,247,0.08); border-color:var(--accent2); color:#7dd4f5; }
+.callout-success{background:rgba(129,199,132,0.08);border-color:var(--accent3); color:#a5d6a7; }
+.callout strong { display:block; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:5px; opacity:0.85; color:inherit; }
+
+/* ── TABLES ── */
+.table-wrap { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; margin:12px 0 20px; border-radius:4px; border:1px solid var(--border); }
+.spec-table { width:100%; border-collapse:collapse; font-size:13px; min-width:360px; }
+.spec-table th { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; text-align:left; padding:9px 12px; background:var(--panel); border-bottom:2px solid var(--border); white-space:nowrap; }
+.spec-table td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5; font-size:13px; }
+.spec-table tr:last-child td { border-bottom:none; }
+.spec-table td:first-child { font-family:'IBM Plex Mono',monospace; color:var(--accent2); font-size:12px; }
+
+/* ── STEP LIST ── */
+.step-list { counter-reset:steps; list-style:none; margin:14px 0; }
+.step-list li { counter-increment:steps; display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); font-size:14px; line-height:1.65; }
+.step-list li:last-child { border-bottom:none; }
+.step-list li::before { content:counter(steps); font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; background:var(--accent); color:var(--black); width:24px; height:24px; min-width:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+
+/* ── TELLS YOU BOX ── */
+.tells-you { background:rgba(79,195,247,0.06); border:1px solid rgba(79,195,247,0.2); border-radius:4px; padding:10px 14px; margin:-6px 0 10px 38px; font-size:13px; color:var(--accent2); line-height:1.55; }
+.tells-you::before { content:"▶ What this tells you: "; font-weight:600; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.5px; }
+
+/* ── DECISION TREE ── */
+.dtree { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:16px; margin:16px 0; font-family:'IBM Plex Mono',monospace; font-size:13px; }
+.dtree-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.dtree-node { display:flex; gap:0; margin:4px 0; }
+.dtree-line { color:var(--border); flex-shrink:0; padding-right:4px; }
+.dtree-q { color:var(--white); font-size:13px; }
+.dtree-yes { color:var(--accent3); font-size:12px; padding-left:4px; }
+.dtree-no  { color:var(--danger);  font-size:12px; padding-left:4px; }
+.dtree-result { background:rgba(245,166,35,0.1); border-left:3px solid var(--accent); padding:6px 10px; margin:4px 0 4px 24px; font-size:12px; color:var(--accent); border-radius:0 3px 3px 0; }
+.dtree-result-bad { background:rgba(239,83,80,0.1); border-left:3px solid var(--danger); padding:6px 10px; margin:4px 0 4px 24px; font-size:12px; color:#f48a88; border-radius:0 3px 3px 0; }
+.dtree-indent { padding-left:20px; }
+
+/* ── QUICK CHECKS ── */
+.qcheck-grid { display:flex; flex-direction:column; gap:10px; margin:14px 0; }
+.qcheck { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:14px; display:flex; gap:12px; align-items:flex-start; }
+.qcheck-icon { font-size:18px; flex-shrink:0; width:28px; text-align:center; margin-top:1px; }
+.qcheck-body {}
+.qcheck-title { font-size:13px; font-weight:600; color:var(--white); margin-bottom:3px; }
+.qcheck-desc { font-size:13px; color:var(--muted); line-height:1.5; }
+.qcheck-points { font-size:12px; color:var(--accent2); margin-top:4px; font-family:'IBM Plex Mono',monospace; }
+
+/* ── FLOW DIAGRAMS ── */
+.flow { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:16px; margin:14px 0; font-family:'IBM Plex Mono',monospace; }
+.flow-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.flow-step { display:flex; align-items:center; gap:0; margin:3px 0; }
+.flow-box { background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:3px; padding:6px 10px; font-size:12px; color:var(--white); flex:1; }
+.flow-box.fail { border-color:rgba(239,83,80,0.4); background:rgba(239,83,80,0.07); color:#f48a88; }
+.flow-arrow { color:var(--muted); padding:0 6px; font-size:14px; flex-shrink:0; }
+.flow-row { display:flex; flex-wrap:wrap; align-items:center; gap:4px; margin:3px 0; }
+
+/* ── SCENARIO CARDS ── */
+.scenario { background:var(--panel); border:1px solid var(--border); border-radius:6px; margin:16px 0; overflow:hidden; }
+.scenario-header { padding:14px 16px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; user-select:none; -webkit-user-select:none; }
+.scenario-header:active { background:rgba(255,255,255,0.03); }
+.scenario-title-wrap {}
+.scenario-tag { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; margin-bottom:3px; }
+.scenario-name { font-size:15px; font-weight:600; color:var(--white); line-height:1.3; }
+.scenario-chevron { color:var(--muted); font-size:18px; flex-shrink:0; transition:transform 0.2s; }
+.scenario.open .scenario-chevron { transform:rotate(180deg); }
+.scenario-body { display:none; padding:0 16px 16px; border-top:1px solid var(--border); }
+.scenario.open .scenario-body { display:block; }
+.symptom-list { list-style:none; margin:10px 0; }
+.symptom-list li { font-size:13px; color:var(--text); padding:4px 0; display:flex; gap:8px; line-height:1.5; }
+.symptom-list li::before { content:"•"; color:var(--danger); flex-shrink:0; }
+
+/* ── SHOW ANSWER ── */
+.show-answer-btn { background:transparent; border:1px dashed var(--border); color:var(--muted); padding:10px 16px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1px; cursor:pointer; border-radius:4px; width:100%; text-align:center; margin:12px 0 0; transition:all 0.15s; }
+.show-answer-btn:active { border-color:var(--accent); color:var(--accent); }
+.answer-reveal { display:none; margin-top:12px; background:rgba(129,199,132,0.07); border:1px solid rgba(129,199,132,0.3); border-radius:4px; padding:14px; font-size:13px; color:var(--accent3); line-height:1.65; }
+.answer-reveal.show { display:block; }
+.answer-reveal strong { color:var(--accent3); display:block; margin-bottom:6px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; }
+
+/* ── COLLAPSE SECTIONS ── */
+.collapsible { margin:10px 0; border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+.collapsible-header { padding:12px 16px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.02); user-select:none; -webkit-user-select:none; font-size:14px; font-weight:600; color:var(--white); }
+.collapsible-header:active { background:rgba(255,255,255,0.05); }
+.collapsible-icon { color:var(--muted); transition:transform 0.2s; font-size:16px; }
+.collapsible.open .collapsible-icon { transform:rotate(180deg); }
+.collapsible-body { display:none; padding:14px 16px; border-top:1px solid var(--border); }
+.collapsible.open .collapsible-body { display:block; }
+
+/* ── WIRE BLOCK ── */
+.wire-block { background:var(--panel); border:1px solid var(--border); border-radius:4px; padding:14px; margin:12px 0; font-family:'IBM Plex Mono',monospace; font-size:12px; overflow-x:auto; }
+.wire-block .wire-title { color:var(--muted); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; }
+.wire-row { display:flex; align-items:center; gap:8px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,0.04); flex-wrap:nowrap; }
+.wire-row:last-child { border-bottom:none; }
+.wire-color { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.wire-gauge { color:var(--muted); min-width:30px; }
+.wire-from  { color:var(--accent2); min-width:100px; }
+.wire-arrow { color:var(--border); }
+.wire-to    { color:var(--accent3); min-width:110px; }
+.wire-func  { color:var(--muted); font-size:10px; }
+
+/* ── QUIZ ── */
+.quiz-section { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:18px 16px; margin:28px 0; }
+.quiz-label { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.quiz-question { font-size:15px; font-weight:600; color:var(--white); margin-bottom:14px; line-height:1.55; }
+.quiz-options { display:flex; flex-direction:column; gap:9px; }
+.quiz-option { background:var(--dark); border:1px solid var(--border); border-radius:6px; padding:13px 14px; cursor:pointer; font-size:14px; color:var(--text); transition:all 0.15s; display:flex; gap:12px; align-items:flex-start; text-align:left; -webkit-user-select:none; user-select:none; }
+.quiz-option:active { transform:scale(0.98); }
+.quiz-option.correct { border-color:var(--accent3); background:rgba(129,199,132,0.1); color:var(--accent3); pointer-events:none; }
+.quiz-option.wrong   { border-color:var(--danger); background:rgba(239,83,80,0.08); color:var(--danger); animation:shake 0.35s ease; }
+.quiz-option.wrong-dismissed { border-color:var(--border); background:var(--dark); color:var(--muted); opacity:0.4; pointer-events:none; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(3px)} }
+.quiz-option-letter { font-family:'IBM Plex Mono',monospace; font-size:11px; background:var(--border); width:24px; height:24px; min-width:24px; display:flex; align-items:center; justify-content:center; border-radius:4px; }
+.quiz-feedback { display:none; margin-top:12px; padding:12px 14px; border-radius:4px; font-size:13px; line-height:1.6; }
+.quiz-feedback.show { display:block; }
+.quiz-feedback.correct-fb { background:rgba(129,199,132,0.1); border:1px solid var(--accent3); color:var(--accent3); }
+.quiz-feedback.wrong-fb   { background:rgba(239,83,80,0.1); border:1px solid var(--danger); color:#f48a88; }
+.quiz-hint { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--danger); margin-top:8px; opacity:0; transition:opacity 0.2s; text-align:center; }
+.quiz-hint.show { opacity:1; }
+.quiz-score { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-top:10px; text-align:right; }
+
+/* ── BUTTONS ── */
+.btn-complete { background:var(--accent); color:var(--black); border:none; padding:16px 28px; font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; cursor:pointer; border-radius:6px; transition:background 0.2s; margin-top:28px; display:block; width:100%; text-align:center; }
+.btn-complete:active { background:#f0b94e; }
+.btn-complete.done { background:var(--accent3); cursor:default; }
+.btn-nav { background:transparent; color:var(--accent2); border:1px solid var(--accent2); padding:14px 20px; font-family:'IBM Plex Mono',monospace; font-size:13px; cursor:pointer; border-radius:6px; transition:all 0.15s; margin-top:10px; display:block; width:100%; text-align:center; }
+.btn-nav:active { background:rgba(79,195,247,0.1); }
+.btn-restart { background:transparent; color:var(--muted); border:1px solid var(--border); padding:14px 20px; font-family:'IBM Plex Mono',monospace; font-size:12px; cursor:pointer; border-radius:6px; transition:all 0.15s; margin-top:10px; display:block; width:100%; text-align:center; letter-spacing:0.5px; }
+.btn-restart:active { color:var(--danger); border-color:var(--danger); background:rgba(239,83,80,0.06); }
+.btn-reset { background:transparent; border:1px solid var(--border); color:var(--muted); font-size:16px; width:28px; height:28px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:border-color 0.15s,color 0.15s; padding:0; line-height:1; }
+.btn-reset:active { color:var(--danger); border-color:var(--danger); }
+
+/* ── DESKTOP ── */
+@media(min-width:640px) {
+  header { padding:0 24px; height:60px; }
+  .logo-main { font-size:26px; }
+  .logo-sub { display:inline; }
+  .progress-track { width:140px; }
+  main { padding:32px 32px 100px; }
+  .module-title { font-size:44px; }
+  h2 { font-size:26px; }
+  .flash-legend { grid-template-columns:1fr 1fr 1fr; }
+  .btn-complete,.btn-nav,.btn-restart { display:inline-block; width:auto; }
+  .btn-nav,.btn-restart { margin-left:10px; }
+}
+@media(min-width:900px) {
+  .bottom-nav { display:none; }
+  .desktop-layout { display:grid; grid-template-columns:260px 1fr; }
+  nav.sidebar { display:block !important; background:var(--dark); border-right:1px solid var(--border); padding:20px 0; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto; }
+  .nav-section-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--muted); padding:0 18px 8px; text-transform:uppercase; margin-top:8px; display:block; }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:11px 18px; cursor:pointer; border-left:3px solid transparent; transition:background 0.15s; }
+  .nav-item:hover { background:rgba(245,166,35,0.06); }
+  .nav-item.active { background:rgba(245,166,35,0.1); border-left-color:var(--accent); }
+  .nav-item.completed .nav-check { background:var(--accent3); color:var(--black); }
+  .nav-check { width:22px; height:22px; border-radius:50%; background:var(--border); display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; font-family:'IBM Plex Mono',monospace; color:var(--muted); font-weight:600; transition:background 0.2s; }
+  .nav-item.active .nav-check { background:var(--accent); color:var(--black); }
+  .nav-title { font-size:13px; line-height:1.3; color:var(--text); }
+  .nav-item.active .nav-title { color:var(--white); font-weight:600; }
+  main { padding:32px 40px 60px; max-width:820px; }
+}
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:var(--dark); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+
+/* ── PROFESSOR MODULE ── */
+.prof-intro { background:linear-gradient(135deg, rgba(245,166,35,0.07) 0%, rgba(79,195,247,0.05) 100%); border:1px solid rgba(245,166,35,0.25); border-radius:8px; padding:20px; margin-bottom:28px; }
+.prof-avatar { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+.prof-icon { font-size:32px; flex-shrink:0; }
+.prof-name { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--accent); letter-spacing:1px; line-height:1; }
+.prof-title { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:1px; margin-top:2px; }
+.prof-intro p { font-size:14px; line-height:1.75; color:var(--text); margin-bottom:8px; }
+.prof-intro p:last-child { margin-bottom:0; }
+.prof-section { margin:28px 0 0; }
+.prof-section-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:6px; }
+.prof-section-letter { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--accent); line-height:1; flex-shrink:0; width:28px; }
+.prof-section-title { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--white); letter-spacing:0.5px; line-height:1.1; padding-top:4px; }
+.prof-section-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:14px; padding-left:40px; font-style:italic; }
+.prompt-card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:16px; margin:10px 0; position:relative; }
+.prompt-card:hover { border-color:rgba(245,166,35,0.3); }
+.prompt-text { font-size:14px; line-height:1.7; color:var(--white); margin-bottom:12px; font-style:italic; }
+.prompt-meta { font-size:11px; color:var(--muted); font-family:'IBM Plex Mono',monospace; margin-bottom:10px; }
+.prompt-footer { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.prompt-tag { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent2); background:rgba(79,195,247,0.08); border:1px solid rgba(79,195,247,0.15); border-radius:3px; padding:3px 7px; }
+.copy-btn { background:var(--dark); border:1px solid var(--border); color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; padding:6px 12px; border-radius:4px; cursor:pointer; transition:all 0.15s; white-space:nowrap; flex-shrink:0; }
+.copy-btn:active { border-color:var(--accent3); color:var(--accent3); background:rgba(129,199,132,0.08); }
+.copy-btn.copied { border-color:var(--accent3); color:var(--accent3); }
+.prof-tip { background:rgba(245,166,35,0.06); border-left:3px solid var(--accent); border-radius:0 4px 4px 0; padding:10px 14px; margin:14px 0; font-size:13px; color:#f0c97a; line-height:1.6; }
+.prof-tip::before { content:"💡 "; }
+.prof-divider { height:1px; background:linear-gradient(to right, var(--accent), transparent); margin:28px 0 0; opacity:0.3; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-main">AN67-E100 Training</div>
+    <span class="logo-sub"> · AA/AN SERIES ELEVATOR · FIELD MECHANIC GUIDE</span>
+  </div>
+  <div class="progress-bar-wrap">
+    <span class="score-badge" id="scoreLabel">0/0 ✓</span>
+    <span class="progress-label" id="progressLabel">0/9</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <button class="btn-reset" onclick="resetProgress()" title="Reset All Progress">↺</button>
+  </div>
+</header>
+
+<nav class="bottom-nav">
+  <div class="bnav-item active" data-bnav="0" onclick="showModule(0)"><div class="bnav-num">1</div><div class="bnav-label">Overview</div></div>
+  <div class="bnav-item" data-bnav="1" onclick="showModule(1)"><div class="bnav-num">2</div><div class="bnav-label">Electrical</div></div>
+  <div class="bnav-item" data-bnav="2" onclick="showModule(2)"><div class="bnav-num">3</div><div class="bnav-label">Hydraulic</div></div>
+  <div class="bnav-item" data-bnav="3" onclick="showModule(3)"><div class="bnav-num">4</div><div class="bnav-label">Interlocks</div></div>
+  <div class="bnav-item" data-bnav="4" onclick="showModule(4)"><div class="bnav-num">5</div><div class="bnav-label">Diagnose</div></div>
+  <div class="bnav-item" data-bnav="5" onclick="showModule(5)"><div class="bnav-num">6</div><div class="bnav-label">Scenarios</div></div>
+  <div class="bnav-item" data-bnav="6" onclick="showModule(6)"><div class="bnav-num">7</div><div class="bnav-label">Quick</div></div>
+  <div class="bnav-item" data-bnav="7" onclick="showModule(7)"><div class="bnav-num">8</div><div class="bnav-label">Flows</div></div>
+  <div class="bnav-item" data-bnav="8" onclick="showModule(8)"><div class="bnav-num">9</div><div class="bnav-label">Professor</div></div>
+</nav>
+
+<div class="desktop-layout">
+<nav class="sidebar" style="display:none">
+  <span class="nav-section-label">Modules</span>
+  <div class="nav-item active" data-module="0" onclick="showModule(0)"><div class="nav-check">1</div><div class="nav-title">System Overview</div></div>
+  <div class="nav-item" data-module="1" onclick="showModule(1)"><div class="nav-check">2</div><div class="nav-title">Electrical System</div></div>
+  <div class="nav-item" data-module="2" onclick="showModule(2)"><div class="nav-check">3</div><div class="nav-title">Hydraulic System</div></div>
+  <div class="nav-item" data-module="3" onclick="showModule(3)"><div class="nav-check">4</div><div class="nav-title">Interlocks & PDM</div></div>
+  <div class="nav-item" data-module="4" onclick="showModule(4)"><div class="nav-check">5</div><div class="nav-title">Diagnostics</div></div>
+  <div class="nav-item" data-module="5" onclick="showModule(5)"><div class="nav-check">6</div><div class="nav-title">Troubleshooting Scenarios</div></div>
+  <div class="nav-item" data-module="6" onclick="showModule(6)"><div class="nav-check">7</div><div class="nav-title">Quick Checks</div></div>
+  <div class="nav-item" data-module="7" onclick="showModule(7)"><div class="nav-check">8</div><div class="nav-title">Flow Diagrams</div></div>
+  <div class="nav-item" data-module="8" onclick="showModule(8)"><div class="nav-check">9</div><div class="nav-title">Altec Professor</div></div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 0: SYSTEM OVERVIEW -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module active" id="module-0">
+  <div class="module-tag">Module 01 · Foundation</div>
+  <div class="module-title">System Overview</div>
+  <div class="module-desc">Before you touch anything, understand what you're dealing with. The AN67-E100 has two separate hydraulic power sources, a dedicated PTO-driven main pump, and a layered interlock system. Every diagnosis starts here.</div>
+
+  <div class="objectives-box">
+    <div class="objectives-label">By the end of this module you will</div>
+    <ul class="objectives-list">
+      <li>Know the difference between the PTO-driven main pump and the emergency DC pump</li>
+      <li>Understand the boundary between the Freightliner chassis and the Altec upfit</li>
+      <li>Know the sequence of events from park brake to boom operation</li>
+      <li>Understand the unit's structural architecture and key specs</li>
+    </ul>
+  </div>
+
+  <h2>Think Like a Senior Tech</h2>
+  <p>Most misdiagnoses happen because a tech jumped straight to a component without understanding the system. This unit has three interdependent systems. When something doesn't work, your first job is to figure out <strong>which system owns the fault</strong> — electrical/PDM, hydraulic, or chassis — before you start swapping parts.</p>
+
+  <div class="callout callout-info">
+    <strong>The Golden Rule</strong>
+    Every time you get a complaint on this unit, ask three questions in order: Are all interlock conditions satisfied? Is hydraulic power actually reaching the control valves? Is the downstream device (solenoid, cylinder, valve) doing its job with that input?
+  </div>
+
+  <h2>Dual-Pump Architecture — Read This First</h2>
+  <p>This unit has <strong>two completely separate hydraulic power sources</strong>. Confusing them is the most common diagnostic error on this unit.</p>
+
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Pump</th><th>Type</th><th>Role</th><th>Activation</th></tr>
+    <tr><td>Main Hydraulic Pump</td><td>Variable displacement, pressure-compensated piston pump</td><td>Powers ALL normal boom, elevator, and outrigger functions</td><td>PTO-driven — requires engine running + PTO engaged</td></tr>
+    <tr><td>Secondary Stowage DC Pump</td><td>Fixed displacement, battery-powered DC motor pump</td><td>Emergency stow ONLY — not for aerial work</td><td>Toggle switch on turntable or captive air system at upper controls</td></tr>
+  </table></div>
+
+  <div class="callout callout-danger">
+    <strong>Do Not Confuse These Two Pumps</strong>
+    The DC stowage pump output is under 2.5 GPM — far too little for aerial work. If the main system isn't working, the answer is not to run the DC pump. Trace the PTO and main pump circuit first. The DC pump is a last-resort recovery tool only.
+  </div>
+
+  <h2>The Three Systems at a Glance</h2>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>System</th><th>What it does</th><th>Fails as...</th><th>Go-to doc</th></tr>
+    <tr><td>Electrical / PDM</td><td>Controls PTO, throttle, interlocks, start/stop, DC pump relay</td><td>No function, interlock won't satisfy, wrong behavior</td><td>Electrical Schematic 990779284 Rev C</td></tr>
+    <tr><td>Hydraulic</td><td>Moves the boom, elevator, and outriggers via fluid pressure</td><td>Slow/weak function, no movement, noise, heat</td><td>Hydraulic Schematic 990779285 Rev B</td></tr>
+    <tr><td>Freightliner Chassis</td><td>Engine, Allison transmission, base wiring, park brake signal</td><td>PTO won't engage, engine issues, neutral signal missing</td><td>Freightliner M2-106 service manual</td></tr>
+  </table></div>
+
+  <h2>Key Specifications</h2>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Item</th><th>Spec</th></tr>
+    <tr><td>Chassis / Engine / Trans</td><td>Freightliner M2-106 / Cummins L9 / Allison 3500 RDS / 6×6</td></tr>
+    <tr><td>Unit flow rate (system demand)</td><td>28.0 GPM — per hydraulic spec sheet</td></tr>
+    <tr><td>Main pump rated flow</td><td>15 GPM — per hydraulic pump spec sheet</td></tr>
+    <tr><td>Main pump rated speed</td><td>1,000 RPM (via 161% PTO ratio)</td></tr>
+    <tr><td>Max system pressure (compensator)</td><td>3,000 psi</td></tr>
+    <tr><td>Relief valve setting (backup)</td><td>3,300 psi</td></tr>
+    <tr><td>Standby pressure (spec)</td><td>475–500 psi — per maintenance manual</td></tr>
+    <tr><td>Pilot system pressure</td><td>375 psi — per maintenance manual</td></tr>
+    <tr><td>Outrigger circuit pressure</td><td>2,500 psi</td></tr>
+    <tr><td>Tool circuit max pressure</td><td>2,000 psi</td></tr>
+    <tr><td>Platform capacity (2-man)</td><td>700 lb (318 kg)</td></tr>
+    <tr><td>Travel height (stowed)</td><td>13' (3.96 m)</td></tr>
+    <tr><td>Max recommended wind speed</td><td>30 mph (48 km/h)</td></tr>
+    <tr><td>DC stowage pump output</td><td>&lt; 2.5 GPM (battery-powered, fixed displacement)</td></tr>
+  </table></div>
+
+  <h2>Sequence of Events: Park Brake to Boom</h2>
+  <p>Walk through this mentally on every "no function" complaint. Each step depends on the one before it.</p>
+  <ol class="step-list">
+    <li><strong>Park brake engaged, transmission in neutral.</strong> Both conditions required before PTO will engage. Park brake signal feeds the interlock circuit.</li>
+    <div class="tells-you">If PTO won't engage, verify both conditions are met. Park brake disengagement after PTO is on will immediately kill both PTO and all machine functions.</div>
+    <li><strong>PTO switch activated.</strong> PDM PTO Card (650-50003) evaluates interlock conditions and sends enable request to the Allison. The PTO Card's auto-neutral function requests that the Allison hold in neutral.</li>
+    <div class="tells-you">PTO will not engage in any gear other than neutral. The auto-neutral behavior is managed by the PTO Card programming (AUTONEUTRAL enabled per schematic) — it sends a request to the Allison, it doesn't override the transmission independently.</div>
+    <li><strong>Main pump driven via hotshift PTO.</strong> Variable displacement piston pump begins responding to load-sense demand from control valves.</li>
+    <div class="tells-you">Engine RPM affects pump output. Per the schematic programming parameters: Remote PTO Set Speed 1 is 875 RPM, Set Speed 2 is 1,200 RPM (labeled "speed for max hydraulic flow"), and Set Speed 3 is set the same as Set Speed 2 (1,200 RPM). PTO maximum speed is programmed at 1,400 RPM. ENG RPM:OPER is 1,650.</div>
+    <li><strong>All outriggers extended and locked.</strong> Outrigger interlock switches (one per leg) must all be made. Interlock solenoid in the lower control mounted control valve energizes, opening the load-sense path to the pump.</li>
+    <div class="tells-you">One outrigger not fully down = interlock solenoid stays de-energized = no boom operation. This is the most common cause of "boom dead, PTO on" complaints.</div>
+    <li><strong>Operator commands a function.</strong> Upper controls pilot system (375 psi per maintenance manual) opens the blocking valve in the lower control valve or elevator control valve. Spool shifts, flow goes to the cylinder.</li>
+    <div class="tells-you">Boom won't move with outriggers set and PTO on? Confirm the blocking valve is receiving pilot pressure — check that the upper controls selector is in the correct position and the interlock trigger is being engaged.</div>
+  </ol>
+
+  <h2>Reference Documents</h2>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Document</th><th>Use it when</th></tr>
+    <tr><td>Electrical Schematic 990779284 Rev C</td><td>Tracing a signal, verifying wire color/gauge, connector pin assignments, PDM modifications</td></tr>
+    <tr><td>Hydraulic Schematic 990779285 Rev B</td><td>Following fluid flow, valve assignments, cylinder pressure ratings, pump specs</td></tr>
+    <tr><td>Maintenance Manual 074920315 (2022)</td><td>Procedures, lubrication, test specs, Section 8 troubleshooting, cylinder service</td></tr>
+  </table></div>
+
+  <div class="quiz-section">
+    <div class="quiz-label">⚡ Knowledge Check</div>
+    <div class="quiz-question">The boom controls are completely dead. PTO is engaged, park brake is set, and all outriggers are down. What should you check first?</div>
+    <div class="quiz-options" id="opts-q1">
+      <div class="quiz-option" data-qid="q1" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">A</span> Check hydraulic fluid level and pump output pressure</div>
+      <div class="quiz-option" data-qid="q1" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">B</span> Activate the DC stowage pump as a backup power source</div>
+      <div class="quiz-option" data-qid="q1" data-correct="true" onclick="checkAnswer(this)"><span class="quiz-option-letter">C</span> Confirm each outrigger leg has fully activated its individual interlock switch — one switch not making will block all boom operation</div>
+      <div class="quiz-option" data-qid="q1" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">D</span> Replace the lower control valve blocking valve</div>
+    </div>
+    <div class="quiz-hint" id="hint-q1">✗ Not right — try again</div>
+    <div class="quiz-feedback correct-fb" id="q1-correct">✓ Correct. All outrigger switches must be made before the interlock solenoid energizes. One leg that appears down but hasn't activated its switch will silently block all boom operation. Verify individual switch activation before going deeper.</div>
+    <div class="quiz-feedback wrong-fb" id="q1-wrong">Think system-first. PTO is on and park brake is set — those are satisfied. The next layer in the sequence is the outrigger interlock. Each leg has its own switch. One switch not activating blocks everything downstream. Start there.</div>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(0)">Mark Complete</button>
+  <button class="btn-nav" onclick="showModule(1)">Next: Electrical →</button>
+  <button class="btn-restart" onclick="restartModule(0)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 1: ELECTRICAL SYSTEM -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-1">
+  <div class="module-tag">Module 02 · Electrical</div>
+  <div class="module-title">Electrical System</div>
+  <div class="module-desc">You don't need to memorize every wire. Know the key circuits well enough to trace a signal from the cab switch to the solenoid — and know where the chassis boundary is.</div>
+
+  <div class="objectives-box">
+    <div class="objectives-label">By the end of this module you will</div>
+    <ul class="objectives-list">
+      <li>Know which four conditions are most likely to cause a no-function complaint</li>
+      <li>Trace the PTO circuit from cab switch through the PDM to the Allison</li>
+      <li>Understand the park brake relay modification and what it controls</li>
+      <li>Know the key connector assignments (F, E, G) and wire paths</li>
+    </ul>
+  </div>
+
+  <h2>What Matters for Troubleshooting — Start Here</h2>
+  <p>All circuits on this unit are <strong>on/off</strong> — no analog control signals in the basic architecture. A switch or relay closes, power reaches the component; it opens, power stops. The four most common causes of no-function in the field:</p>
+
+  <div class="callout callout-warn">
+    <strong>The Four Field Killers</strong>
+    1. Park brake not set — disengaging it after PTO kills both PTO and all machine functions immediately.<br>
+    2. Outrigger interlock not satisfied — all outrigger legs must make their individual switches.<br>
+    3. PDM relay or start/stop circuit fault — check PDM connector center screw first.<br>
+    4. PTO engaged in the wrong transmission state — the Allison will not accept the enable request unless in neutral.
+  </div>
+
+  <h2>PTO Engagement Circuit — Full Trace</h2>
+  <ol class="step-list">
+    <li><strong>Park brake set + transmission in neutral.</strong> Both conditions required. The PDM PTO Card monitors these before allowing the enable request.</li>
+    <div class="tells-you">PTO won't engage with either condition missing. The PTO Card programming includes an auto-neutral request to the Allison — but the transmission must already be in neutral for the engage to succeed. It will not shift a transmission that's in gear.</div>
+    <li><strong>PTO switch activated.</strong> Signal travels to the PDM PTO Card (650-50003). Card evaluates interlock conditions and sends the enable request to the Allison.</li>
+    <div class="tells-you">If PTO won't engage, this is the first split point. Is the park brake signal reaching the interlock circuit? Is the transmission neutral signal present? Check both inputs before assuming a module fault.</div>
+    <li><strong>PTO Card sends enable request to Allison via PTO circuits 112, 114, 117, 118, 155, 161.</strong> Active Package: 223.</li>
+    <div class="tells-you">PTO circuits use Jumpers J1/J2/J3 to configure for Allison 3K/4K vs 1K/2K. Verify jumper settings on any replacement PTO card.</div>
+    <li><strong>PTO engages hotshift mechanism.</strong> Drives main pump via 161% ratio at street-side (left) PTO opening.</li>
+    <div class="tells-you">PTO engaged but pump not spinning? Verify the hotshift mechanism is actually actuating. This is now a mechanical/chassis concern — not PDM.</div>
+    <li><strong>Engine throttle commanded.</strong> Throttle Card (650-50015) sends command to engine. Per schematic: Remote PTO Set Speed 1 = 875 RPM, Set Speed 2 = 1,200 RPM (speed for max hydraulic flow), Set Speed 3 = same as Set Speed 2 (1,200 RPM). PTO maximum speed = 1,400 RPM. ENG RPM:OPER = 1,650.</li>
+    <div class="tells-you">Engine stays at idle with PTO on? Check the throttle card output and engine ECM interface. Verify the correct throttle card version is installed for the Cummins L9.</div>
+  </ol>
+
+  <h2>Park Brake Relay Modification</h2>
+  <p>The E24 (18 AWG BLK) park brake sense wire is modified from its stock routing. This is a required field modification — understand it before diagnosing any park brake interlock issue.</p>
+
+  <div class="wire-block">
+    <div class="wire-title">Park Brake Interlock Relay Wiring</div>
+    <div class="wire-row"><div class="wire-color" style="background:#222"></div><div class="wire-gauge">18 BLK</div><div class="wire-from">E24 wire</div><div class="wire-arrow">→</div><div class="wire-to">Relay terminal 85</div><div class="wire-func">Moved from TB9-2 (brake sense)</div></div>
+    <div class="wire-row"><div class="wire-color" style="background:#8b4513"></div><div class="wire-gauge">Jumper</div><div class="wire-from">Relay terminal 86</div><div class="wire-arrow">→</div><div class="wire-to">TB7-15 (IGN hot)</div><div class="wire-func">Relay coil energize</div></div>
+    <div class="wire-row"><div class="wire-color" style="background:#222"></div><div class="wire-gauge">Jumper</div><div class="wire-from">Relay terminal 30</div><div class="wire-arrow">→</div><div class="wire-to">TB7-12 (PTO/SW)</div><div class="wire-func">PTO switch path</div></div>
+    <div class="wire-row"><div class="wire-color" style="background:#2d8a2d"></div><div class="wire-gauge">18 GRN</div><div class="wire-from">E15/F16</div><div class="wire-arrow">→</div><div class="wire-to">TB7-12 (moved from TB7-11)</div><div class="wire-func">T/M signal</div></div>
+    <div class="wire-row"><div class="wire-color" style="background:#2d8a2d"></div><div class="wire-gauge">18 GRN</div><div class="wire-from">Relay terminal 87</div><div class="wire-arrow">→</div><div class="wire-to">TB7-11 (T/M)</div><div class="wire-func">Added jumper</div></div>
+  </div>
+
+  <h2>Key Connectors and Wire Assignments</h2>
+
+  <div class="collapsible open">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Connector "F" — 102-Pin Main Connector (cab-to-machine) <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Mates to Connector G on the machine harness — pin numbers match (F42 = G42).</p>
+      <div class="table-wrap"><table class="spec-table">
+        <tr><th>Wire</th><th>Function</th><th>Field Notes</th></tr>
+        <tr><td>F60 — 6 AWG RED</td><td>Battery bus bar main power</td><td>100A max. Main power feed.</td></tr>
+        <tr><td>F5 — 10 AWG RED</td><td>ACC 12 battery hot</td><td>25A max.</td></tr>
+        <tr><td>F14/E21 — 14 AWG BLU</td><td>TB17-5 Start solenoid</td><td>Shared wire across connectors.</td></tr>
+        <tr><td>F33 — 14 AWG RED</td><td>TB11-9 PTO/clutch output</td><td>25A max.</td></tr>
+        <tr><td>F79 — 18 AWG WHT</td><td>TB16-1 Start/Stop input</td><td>PDM remote start/stop activation.</td></tr>
+        <tr><td>F66 — 14 AWG GRY</td><td>TB17-6 Emergency Operation</td><td>Emergency operate output.</td></tr>
+        <tr><td>F74 — 18 AWG ORG</td><td>TB15-6 12V Machine</td><td>Disconnect per modification — see schematic.</td></tr>
+      </table></div>
+      <p style="font-size:12px; color:var(--muted); margin-top:6px;">Max amps: F43/F60 = 100A · F48/F49/F54/F55 = 60A · F1–8/F95–102 = 25A · all others = 13A</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Connector "E" — 29-Pin Chassis Interface <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Chassis-side connector. Wires installed by chassis supplier are shown in parentheses on the schematic.</p>
+      <div class="table-wrap"><table class="spec-table">
+        <tr><th>Wire</th><th>Function</th><th>Field Notes</th></tr>
+        <tr><td>E1 — 14 AWG BRN</td><td>TB13-1 IGN hot</td><td>Required for PDM diagnostics to be active.</td></tr>
+        <tr><td>E2 — 14 AWG BRN</td><td>TB13-2 IGN cold</td><td>Ignition cold path.</td></tr>
+        <tr><td>E22 — 18 AWG WHT</td><td>TB15-7 Ground</td><td>Signal ground reference.</td></tr>
+        <tr><td>E23 — 18 AWG RED</td><td>TB7-14 Battery</td><td>Battery reference signal.</td></tr>
+        <tr><td>E24 — 18 AWG BLK</td><td>Park brake sense</td><td>Moved to relay terminal 85 per modification.</td></tr>
+        <tr><td>E14–E5</td><td>ACC 1–10 signal inputs</td><td>Accessory input signals, one per function.</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">PDM — Power Distribution Module <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>The PDM (P/N 970348358) is the central hub for remote start/stop and DC pump relay activation. PDM Card: 650-50015. Active Package: 223. Connector: 970138202 (19-pin).</p>
+      <div class="table-wrap"><table class="spec-table">
+        <tr><th>Pin</th><th>Function</th><th>Notes</th></tr>
+        <tr><td>Pin 8</td><td>12V+ power</td><td>Must be present for PDM to operate.</td></tr>
+        <tr><td>Pin 11</td><td>Start/Stop input (TB16-1)</td><td>Wire F79 — 18 AWG WHT.</td></tr>
+        <tr><td>Pin 12</td><td>PDM Ground (TB10)</td><td>Poor ground here affects multiple circuits.</td></tr>
+        <tr><td>Pin 18</td><td>12V Console (TB16-10)</td><td>Powers cab console.</td></tr>
+        <tr><td>Pin 10</td><td>Emergency Operation</td><td>14 AWG GRY.</td></tr>
+        <tr><td>Pin 2</td><td>2nd Preset (if used)</td><td>18 AWG BLK.</td></tr>
+      </table></div>
+      <div class="callout callout-warn" style="margin-top:10px;">
+        <strong>Connector Center Screw</strong>
+        The PDM plug connector will not make proper electrical contact until the center screw is fully tightened. A common miss during installation — can cause intermittent failures that look like module faults.
+      </div>
+    </div>
+  </div>
+
+  <h2>Circuit Breaker Reference</h2>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Rating</th><th>Part Number</th><th>Notes</th></tr>
+    <tr><td>5A</td><td>990619673</td><td>IGN hot fuse circuit</td></tr>
+    <tr><td>10A</td><td>596-50056</td><td>CB1, CB2</td></tr>
+    <tr><td>15A</td><td>596-50057</td><td>General accessories</td></tr>
+    <tr><td>20A</td><td>596-50058</td><td>CB12–CB16</td></tr>
+    <tr><td>25A</td><td>596-50059</td><td>CB11 — swap from 20A per modification note</td></tr>
+    <tr><td>30A</td><td>596-50050</td><td>High-draw circuits</td></tr>
+  </table></div>
+
+  <h2>Slip Ring</h2>
+  <p>The slip ring mounts to the bottom of the rotary joint and carries electrical power through the centerline of rotation — this is how the turntable spins 360° without twisting the wiring. Two connectors are inside the turntable; one is in the pedestal. Do not cut any wires during removal — disconnect the connectors first, then they pass through the rotary joint bore.</p>
+
+  <div class="quiz-section">
+    <div class="quiz-label">⚡ Knowledge Check</div>
+    <div class="quiz-question">PTO won't engage. Park brake is set, transmission is in neutral, and all outriggers are down. You check and find the E24 (18 AWG BLK) wire is still connected to TB9-2. What is the issue?</div>
+    <div class="quiz-options" id="opts-q2">
+      <div class="quiz-option" data-qid="q2" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">A</span> E24 at TB9-2 is correct — the park brake signal should be there</div>
+      <div class="quiz-option" data-qid="q2" data-correct="true" onclick="checkAnswer(this)"><span class="quiz-option-letter">B</span> E24 should have been moved to relay terminal 85 per the park brake relay modification — leaving it at TB9-2 bypasses the intended circuit behavior</div>
+      <div class="quiz-option" data-qid="q2" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">C</span> E24 should be disconnected entirely when the park brake is set</div>
+      <div class="quiz-option" data-qid="q2" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">D</span> The 18 AWG BLK wire gauge is too light for this circuit — it needs to be upgraded</div>
+    </div>
+    <div class="quiz-hint" id="hint-q2">✗ Not right — try again</div>
+    <div class="quiz-feedback correct-fb" id="q2-correct">✓ Correct. The electrical schematic modification note explicitly moves E24 from TB9-2 to relay terminal 85, with the relay coil tied to IGN hot (terminal 86 → TB7-15) and the relay switching path connected to the PTO switch circuit. Leaving it at TB9-2 means the park brake interlock relay is never wired into the circuit correctly.</div>
+    <div class="quiz-feedback wrong-fb" id="q2-wrong">This is a documented modification on the schematic. E24 (18 BLK) is moved from TB9-2 to relay terminal 85. The relay connects IGN hot to the PTO switch path via terminals 86 and 30. If this modification wasn't made, the park brake interlock relay isn't part of the circuit — and the intended behavior won't work correctly.</div>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(1)">Mark Complete</button>
+  <button class="btn-nav" onclick="showModule(2)">Next: Hydraulic →</button>
+  <button class="btn-restart" onclick="restartModule(1)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 2: HYDRAULIC SYSTEM -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-2">
+  <div class="module-tag">Module 03 · Hydraulics</div>
+  <div class="module-title">Hydraulic System</div>
+  <div class="module-desc">Know the flow path before you start swapping valves. Most hydraulic complaints trace back to one of three things: no pressure, wrong pressure, or pressure not getting where it needs to go.</div>
+
+  <div class="objectives-box">
+    <div class="objectives-label">By the end of this module you will</div>
+    <ul class="objectives-list">
+      <li>Understand how the variable displacement pump responds to load demand</li>
+      <li>Explain the 13.5 GPM / 11.0 GPM split and what it means in practice</li>
+      <li>Know every pressure level in the system and where each is set</li>
+      <li>Understand how holding valves work and how to test them</li>
+    </ul>
+  </div>
+
+  <h2>How the Main Pump Works</h2>
+  <p>The main pump is a <strong>variable displacement, pressure-compensated piston pump</strong>. It doesn't run at full output all the time — it adjusts flow to match exactly what the system needs at any moment.</p>
+  <p>The pump reacts to a <strong>load-sense (LS) signal</strong> returned from the control valves. Move a function and the valve sends a signal pressure to the pump telling it how much flow and pressure is needed. The pump matches it. Nothing moving? The pump goes to low-pressure standby. This is why standby pressure is a valuable diagnostic check — a pump at the wrong standby tells you something is wrong before you even command a function.</p>
+
+  <div class="callout callout-success">
+    <strong>Diagnostic Principle</strong>
+    Before condemning any hydraulic component, check standby pressure at the pump test port (marked PD on the lower control valve). Standby spec is <strong>475–500 psi</strong> (per maintenance manual) with all functions off and the aerial device selector active. Correct standby with no function = problem is downstream (valve, solenoid, cylinder). No standby or wrong standby = problem is at the pump or its load-sense circuit.
+  </div>
+
+  <h2>System Pressure Map — Know These Cold</h2>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Pressure Level</th><th>Value</th><th>What Sets It</th><th>Where It Applies</th></tr>
+    <tr><td>Max system pressure</td><td>3,000 psi</td><td>Pump pressure compensator</td><td>Normal operating ceiling — all circuits</td></tr>
+    <tr><td>Relief valve</td><td>3,300 psi</td><td>Relief valve in lower control valve</td><td>Backup only — fires if compensator fails</td></tr>
+    <tr><td>Outrigger circuit</td><td>2,500 psi</td><td>Derived: 1,500 + 500 + 500</td><td>Outrigger and tool circuit upstream</td></tr>
+    <tr><td>Tool circuit max</td><td>2,000 psi</td><td>2,500 psi minus 500 psi at tool control valve</td><td>Tool functions</td></tr>
+    <tr><td>Boom/elevator LS signal</td><td>1,500 psi</td><td>Load-sense signal to pump</td><td>Boom and elevator normal operation</td></tr>
+    <tr><td>Elevator/boom arm cylinder holding</td><td>3,250 psi</td><td>3:1 pilot ratio holding valves</td><td>Upper and lower arm cylinder counterbalance</td></tr>
+    <tr><td>Standby pressure</td><td>475–500 psi</td><td>Load sensing valve in compensator housing</td><td>Measured at PD test port, all functions off</td></tr>
+    <tr><td>Pilot system pressure</td><td>375 psi</td><td>Pilot pressure reducing valve in lower/elevator control valve</td><td>Remote control of lower control valve spools</td></tr>
+  </table></div>
+
+  <div class="callout callout-info">
+    <strong>How Outrigger Pressure Is Built</strong>
+    1,500 PSI load-sense signal + 500 PSI from tool control valve + 500 PSI pump compensator = 2,500 PSI outrigger circuit. The tool circuit then takes that 2,500 PSI and subtracts 500 PSI to produce the 2,000 PSI tool pressure. These are not independent settings — they're derived from each other.
+  </div>
+
+  <h2>The 13.5 GPM / 11.0 GPM Split</h2>
+  <p>The hydraulic schematic shows two flow values: <strong>13.5 GPM and 11.0 GPM</strong>. This is one pump routing flow to two separate valve circuits simultaneously — not two pumps.</p>
+  <p>The <strong>13.5 GPM path</strong> feeds boom functions through the lower control valve. The <strong>11.0 GPM path</strong> feeds elevator functions through the elevator control valve. When both are operated at the same time, the pump supplies both circuits simultaneously.</p>
+  <p>Within each circuit, <strong>shuttle valves in the load-sense line handle priority</strong>. Two boom functions running together? The shuttle valve passes the highest pressure demand to the pump. Each spool has its own pressure compensator — if one function needs less than what the pump is delivering, the compensator throttles that spool's flow automatically. Functions run at correct speed regardless of what else is active.</p>
+  <div class="callout callout-warn">
+    <strong>Note on Flow Figures</strong>
+    The hydraulic pump spec sheet (P/N 990280340) lists pump rated flow as 15 GPM. The maintenance manual (Section 5) states the pump delivers 28 gpm at 3,000 psi, and the hydraulic spec sheet lists unit flow rate as 28.0 GPM. The 28 GPM figure represents the system flow demand, while 15 GPM is the pump's rated output speed. Always verify against your specific unit's documents when ordering or diagnosing.
+  </div>
+
+  <h2>Control Valve Architecture</h2>
+
+  <div class="collapsible open">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Aerial Device / Outrigger Selector Valve — First Routing Point <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Located at the tailshelf, ground-level controls. This is where flow is directed after the pump — before it reaches any boom or outrigger circuit.</p>
+      <ul class="symptom-list">
+        <li>De-energized (default): Aerial device mode — oil routes to lower control valve, outrigger circuit blocked</li>
+        <li>Energized: Outrigger mode — oil routes to outrigger circuit, lower control valve blocked</li>
+        <li>Contains: outrigger interlock solenoid, pressure control valves, tools flow control valve, and a system relief valve</li>
+        <li>Tool flow adjustable from 0.3 to 10.6 GPM via the tools flow control valve</li>
+      </ul>
+      <div class="tells-you">If the boom is dead but outriggers work normally (or vice versa), confirm the selector solenoid is in the correct state. A selector stuck in the wrong mode silently blocks one entire circuit.</div>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Lower Control Valve — Boom Functions (Turntable) <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Contains: pilot and purge pressure reducing valves, automatic purge valves, bypass valve, boom stow solenoid, station selector valve, overcenter blocking section, and <strong>three boom spools plus the winch</strong>. Each spool is 3-position, 4-way, spring-centered.</p>
+      <p>The load-sense shuttle valve network between spools sends the highest demand to the pump. Section pressure compensators on each spool let multiple functions run accurately simultaneously.</p>
+      <div class="tells-you">One boom function slow while others are fine? The problem is at that section's spool or compensator — not at the pump. Check the electrical command signal to that spool's solenoid before opening the valve.</div>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Elevator Control Valve — Elevator Functions <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Parallel architecture to the lower control valve, dedicated to elevator functions. Contains pilot/purge valves, bypass valve, elevator stow pressure limiters, station selector, and <strong>two elevator spools</strong>. Same load-sense shuttle valve logic — highest demand wins.</p>
+      <p>Elevator function speed is adjusted via the section pressure compensator on each spool. The elevator stow valve (solenoid-operated, 2-position, 2-way) with pressure switch prevents elevator damage from debris during stowing.</p>
+    </div>
+  </div>
+
+  <h2>Holding Valves — How to Test Them</h2>
+  <p>Holding valves keep cylinders in position under load and prevent drift if a hydraulic line fails. Two types are used:</p>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Pilot Operated Check Valves — Where Used and How to Test <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p><strong>Used on:</strong> Outrigger cylinders, jib tilt, jib extension, platform tilt. Installed in cross-ported pairs — oil to one port pilots open the opposite check valve.</p>
+      <p><strong>Test:</strong> Position the cylinder under load, disengage PTO, fully shift the manual lever. If the cylinder doesn't move, the holding valve is working. Slow retraction after shifting = holding valve may be leaking. Find root cause before returning to service.</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Counterbalance Valves — Overrunning Load Cylinders <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Used on cylinders with overrunning loads. Cross-ported, same pilot-to-open concept as check valves. Same test procedure.</p>
+      <p>Use a test block to adjust the relief setting on counterbalance valves during testing — do not attempt to adjust with the boom in a loaded position.</p>
+    </div>
+  </div>
+
+  <h2>Common Hydraulic Failure Patterns</h2>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">All Functions Slow or Weak <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <ul class="symptom-list">
+        <li>Every boom and elevator function is equally slow</li>
+        <li>May worsen as oil heats up</li>
+        <li>No noise difference between functions</li>
+      </ul>
+      <h4>Think about</h4>
+      <p>All functions equally slow = fault is upstream of all valves. Check hydraulic oil level first (must check with all booms stowed, outriggers retracted, vehicle level). Then check PTO engagement and engine RPM — correct throttle set speed must be reached. Pump standby pressure and flow test if those check out.</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">One Function Slow, Others Normal <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <ul class="symptom-list">
+        <li>One specific movement is slow or weak</li>
+        <li>All other functions perform normally</li>
+        <li>May be accompanied by noise from that spool section</li>
+      </ul>
+      <h4>Think about</h4>
+      <p>One section affected = problem is downstream of the pump at that specific spool. Before opening the valve, check the electrical command signal to that spool's solenoid and verify full voltage is reaching it. Partial voltage on a solenoid (high resistance connection) produces slow, weak movement that looks exactly like a stuck spool.</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Pump Runs But No Function At All <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <ul class="symptom-list">
+        <li>Main pump is running (feel or hear it)</li>
+        <li>No boom, no elevator, no outrigger movement</li>
+        <li>No load-sense pressure at valve inlet</li>
+      </ul>
+      <h4>Think about</h4>
+      <p>Check outrigger interlock solenoid first — if it's not energized, the load-sense path to the pump is blocked and no flow will be demanded. If outriggers are all confirmed down and the interlock solenoid is energized, check whether the aerial device/outrigger selector valve is in the correct mode. Then check standby and working pressure at the pump.</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Pump Cavitation / Noise After Repair <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <ul class="symptom-list">
+        <li>Whining or unusual noise from pump immediately after hydraulic work</li>
+        <li>Spongey or inconsistent boom movement</li>
+        <li>Fluid temperature rising faster than normal</li>
+      </ul>
+      <h4>Think about</h4>
+      <p>After any repair that opened the suction circuit, air gets in. Back off immediately — do not run the pump hard against a cavitating load. Check all suction-side fittings you opened: a fitting that isn't fully torqued will pull air under suction vacuum without showing visible fluid loss under pressure. Cycle all functions slowly and repeatedly at minimal load to work air back to the reservoir.</p>
+      <div class="callout callout-danger" style="margin-top:10px;">
+        <strong>Don't Condemn the Pump</strong>
+        Post-repair cavitation is almost always air in the suction circuit — not pump damage. Replacing the pump without fixing the air entry point means the replacement will cavitate too.
+      </div>
+    </div>
+  </div>
+
+  <h2>Secondary Stowage DC Pump</h2>
+  <p>Fixed displacement, under 2.5 GPM, battery-powered. Its only function is emergency stow when the main system is unavailable. Activate from turntable toggle switch or captive air system at upper controls. Do not use for aerial work.</p>
+  <p>When diagnosing a stowage failure, check in this order: battery charge state → DC pump motor wiring → PDM pump relay connection (center screw tightened) → pump motor itself. Low battery voltage will produce weak pump performance that looks like a failed motor.</p>
+
+  <div class="quiz-section">
+    <div class="quiz-label">⚡ Knowledge Check</div>
+    <div class="quiz-question">PTO is on, engine is at the correct RPM, and you can hear the main pump running. But there is zero hydraulic function — no boom, no elevator, nothing. All outriggers appear to be down. What is the most productive first check?</div>
+    <div class="quiz-options" id="opts-q3">
+      <div class="quiz-option" data-qid="q3" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">A</span> Replace the lower control valve — the spool is stuck</div>
+      <div class="quiz-option" data-qid="q3" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">B</span> Check pump output pressure and replace pump if low</div>
+      <div class="quiz-option" data-qid="q3" data-correct="true" onclick="checkAnswer(this)"><span class="quiz-option-letter">C</span> Verify each outrigger switch is actually activating — then confirm the outrigger interlock solenoid is energized and the aerial device/outrigger selector is in the correct mode</div>
+      <div class="quiz-option" data-qid="q3" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">D</span> Activate the DC stowage pump to bypass the main pump circuit</div>
+    </div>
+    <div class="quiz-hint" id="hint-q3">✗ Not right — try again</div>
+    <div class="quiz-feedback correct-fb" id="q3-correct">✓ Correct. Zero function across all circuits with a running pump points to the outrigger interlock or the aerial device/outrigger selector valve before it points to the pump. The interlock solenoid must be energized to open the load-sense path. An outrigger that appears down but hasn't activated its switch will silently block everything. Check the interlock status first.</div>
+    <div class="quiz-feedback wrong-fb" id="q3-wrong">The pump is running — that means electrical supply to the pump is fine. Zero function across ALL circuits simultaneously points upstream of all valves. The outrigger interlock solenoid controls the load-sense path to the pump. If it's not energized, no demand signal reaches the pump regardless of what the operator does. Verify interlock status before touching any valve.</div>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(2)">Mark Complete</button>
+  <button class="btn-nav" onclick="showModule(3)">Next: Interlocks →</button>
+  <button class="btn-restart" onclick="restartModule(2)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 3: INTERLOCKS & PDM -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-3">
+  <div class="module-tag">Module 04 · Interlocks</div>
+  <div class="module-title">Interlocks & PDM Logic</div>
+  <div class="module-desc">This unit has multiple layered interlocks. Understand what each one controls, what satisfies it, and what happens when it's not met — before you start guessing at components.</div>
+
+  <div class="objectives-box">
+    <div class="objectives-label">By the end of this module you will</div>
+    <ul class="objectives-list">
+      <li>Trace the outrigger interlock from individual switches to the pump load-sense path</li>
+      <li>Understand the lanyard detection system and its blocking valve</li>
+      <li>Know the PDM throttle set speeds and how they're used</li>
+      <li>Understand the elevator stow valve logic</li>
+    </ul>
+  </div>
+
+  <h2>Outrigger Interlock System</h2>
+  <p>The outrigger interlock is an electric/hydraulic combination that blocks boom operation until <strong>every outrigger leg is fully lowered</strong>. One switch per leg — all switches must make before anything clears.</p>
+  <ol class="step-list">
+    <li><strong>Each leg has its own interlock switch.</strong> All are monitored simultaneously by the interlock control module.</li>
+    <div class="tells-you">Physically confirming an outrigger is "down" is not the same as confirming its switch is made. Inspect switch position, wiring, and whether the leg has fully reached the switch actuation point.</div>
+    <li><strong>All switches made → module energizes the interlock solenoid in the lower control mounted control valve.</strong> This opens the load-sense path to the pump. Boom operation is now possible.</li>
+    <div class="tells-you">The interlock solenoid is the hydraulic gate. Without it energized, the pump has no demand signal and produces no working pressure regardless of RPM or PTO status.</div>
+    <li><strong>Any leg raised or retracted → solenoid de-energizes immediately.</strong> Load-sense path blocked. All boom movement stops, mid-function if necessary.</li>
+    <div class="tells-you">This is a safety feature. It is not a fault. If boom movement unexpectedly stops, check whether an outrigger shifted or lost contact before chasing electrical faults.</div>
+  </ol>
+
+  <h4>Decision Tree — Outrigger Interlock</h4>
+  <div class="dtree">
+    <div class="dtree-title">Boom Dead With PTO On and Outriggers "Down"</div>
+    <div class="dtree-node"><div class="dtree-line">├─</div><div class="dtree-q">All outrigger switches confirmed making? <span class="dtree-yes">YES→</span><span class="dtree-no"> NO→</span></div></div>
+    <div class="dtree-indent"><div class="dtree-result-bad">Fix the switch or outrigger leg that isn't fully activating its switch before going further</div></div>
+    <div class="dtree-node"><div class="dtree-line">├─</div><div class="dtree-q">Interlock solenoid energized? <span class="dtree-yes">YES→</span><span class="dtree-no"> NO→</span></div></div>
+    <div class="dtree-indent"><div class="dtree-result-bad">Interlock control module or wiring fault — trace module outputs</div></div>
+    <div class="dtree-node"><div class="dtree-line">├─</div><div class="dtree-q">Selector valve in aerial device mode? <span class="dtree-yes">YES→</span><span class="dtree-no"> NO→</span></div></div>
+    <div class="dtree-indent"><div class="dtree-result-bad">Selector solenoid stuck energized — stuck in outrigger mode</div></div>
+    <div class="dtree-node"><div class="dtree-line">└─</div><div class="dtree-q">Standby pressure 475–500 psi at PD port? <span class="dtree-yes">YES→ Trace pilot/blocking valve</span><span class="dtree-no"> NO→ Pump or load-sense fault</span></div></div>
+  </div>
+
+  <h2>Lanyard Detection System</h2>
+  <p>The lanyard interlock system, if equipped, prevents aerial unit operation from the upper controls if the operator's lanyard is not attached. <strong>Important: per the maintenance manual, this system only prevents unit operation when the selector is in the upper controls position.</strong> Four components work together:</p>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Component</th><th>Role</th></tr>
+    <tr><td>Lanyard Fiber Optic Switch</td><td>Detects whether the lanyard is properly attached</td></tr>
+    <tr><td>Single Handle Fiber Optic Switch</td><td>Monitors single handle control interlock engagement state</td></tr>
+    <tr><td>Fiber Optic Transceiver</td><td>Reads and interprets optical signals from both switches</td></tr>
+    <tr><td>Lanyard Interlock System Control Module</td><td>Processes signals and activates the unit motion blocking valve when interlock is not satisfied</td></tr>
+  </table></div>
+  <p>The system also has an <strong>anti-tie-down feature</strong>: at every PTO cycle, it detects whether an object is already satisfying the switch. If something is detected at the start of a PTO cycle (tied-down), the object must be removed to resume normal operation. The audible alarm chirps to indicate tie-down mode.</p>
+  <p>Override is possible via the turntable override momentary control (held longer than the preset time, default 0.5 seconds). Override is also activated when entering secondary stowage mode. The schematic also shows switch S14 (SENSE MODE / OVRIDE SENSE) — use per documented service procedures only, not during normal aerial operations.</p>
+
+  <h2>Engine Throttle Set Points</h2>
+  <p>Throttle is managed through the PDM Throttle Card (650-50015). Set speeds are programmed per the electrical schematic — not field-adjustable without the programming tool.</p>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Parameter</th><th>Value</th><th>Notes</th></tr>
+    <tr><td>Low idle speed</td><td>750 RPM</td><td>Per schematic programming parameters</td></tr>
+    <tr><td>Remote PTO Set Speed 1</td><td>875 RPM</td><td>At least 100 RPM above low idle — per schematic annotation</td></tr>
+    <tr><td>Remote PTO Set Speed 2</td><td>1,200 RPM</td><td>Labeled "speed for max hydraulic flow" on schematic</td></tr>
+    <tr><td>Remote PTO Set Speed 3</td><td>1,200 RPM</td><td>Schematic annotation: "set same as Set Speed 2"</td></tr>
+    <tr><td>PTO maximum speed (item 4)</td><td>1,400 RPM</td><td>Maximum allowable PTO speed — not a set speed</td></tr>
+    <tr><td>ENG RPM:OPER</td><td>1,650 RPM</td><td>Allison TCM parameter — engine operating RPM for Allison</td></tr>
+    <tr><td>Max vehicle speed (PTO on)</td><td>30 MPH</td><td>Per schematic programming parameters</td></tr>
+  </table></div>
+
+  <h2>Elevator Stow Valve Logic</h2>
+  <p>The elevator stow valve is a solenoid-operated, 2-position, 2-way valve with a pressure switch at the lower controls. This combination prevents the elevator from slamming into debris during the stow stroke.</p>
+  <ol class="step-list">
+    <li>Lower elevator cross link activates a switch on the lower elevator arm as stowing progresses.</li>
+    <li>Switch activation sends current to the stow solenoid, closing the valve.</li>
+    <li>Valve closing stops elevator stow movement at the correct position.</li>
+  </ol>
+  <div class="callout callout-warn">
+    <strong>Elevator Stow Alarm Active</strong>
+    If the stow alarm is active, the elevator has not reached its stow position. Check whether the cross link is actually contacting its switch. Also inspect under the elevator assembly for debris that may be blocking the final stow stroke. The pressure switch monitors for obstructions.
+  </div>
+
+  <h2>Electrical / Hydraulic Analog Reference</h2>
+  <div class="table-wrap"><table class="spec-table">
+    <tr><th>Electrical Component</th><th>Hydraulic Equivalent</th><th>Shared Function</th></tr>
+    <tr><td>Battery</td><td>Pump</td><td>Source of energy / pressure</td></tr>
+    <tr><td>Fuse / Circuit Breaker</td><td>Relief Valve</td><td>Overload protection</td></tr>
+    <tr><td>Diode</td><td>Check Valve</td><td>One-directional flow only</td></tr>
+    <tr><td>Slip Ring Assembly</td><td>Rotary Joint</td><td>Transmit through a continuously rotating connection</td></tr>
+  </table></div>
+
+  <div class="quiz-section">
+    <div class="quiz-label">⚡ Knowledge Check</div>
+    <div class="quiz-question">A boom function suddenly stops mid-movement. The operator says nothing changed — no switches were touched. PTO is still on. What is the most likely first thing to check?</div>
+    <div class="quiz-options" id="opts-q4">
+      <div class="quiz-option" data-qid="q4" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">A</span> The lower control valve spool has stuck mid-stroke</div>
+      <div class="quiz-option" data-qid="q4" data-correct="true" onclick="checkAnswer(this)"><span class="quiz-option-letter">B</span> An outrigger shifted or lost contact with its interlock switch — the interlock solenoid de-energized mid-operation and blocked the load-sense path</div>
+      <div class="quiz-option" data-qid="q4" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">C</span> The pump has lost prime and needs to be bled</div>
+      <div class="quiz-option" data-qid="q4" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">D</span> The lanyard interlock system fiber optic switch has failed</div>
+    </div>
+    <div class="quiz-hint" id="hint-q4">✗ Not right — try again</div>
+    <div class="quiz-feedback correct-fb" id="q4-correct">✓ Correct. Sudden unexpected stop mid-operation with PTO still on points strongly to an outrigger interlock break. The interlock solenoid will de-energize the instant any outrigger leg loses switch contact — which can happen if an outrigger shifts on soft ground or if a leg connection vibrates loose. Check interlock switch status before diagnosing any component.</div>
+    <div class="quiz-feedback wrong-fb" id="q4-wrong">A sudden mid-operation stop with PTO still engaged and no switch inputs is the classic symptom of an outrigger interlock interruption. The outrigger interlock solenoid will instantly de-energize and block the load-sense path if any leg loses its switch contact. This can happen from ground shifting or vibration — no fault, just a lost contact. Check outrigger switch status first.</div>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(3)">Mark Complete</button>
+  <button class="btn-nav" onclick="showModule(4)">Next: Diagnostics →</button>
+  <button class="btn-restart" onclick="restartModule(3)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 4: DIAGNOSTICS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-4">
+  <div class="module-tag">Module 05 · Diagnostics</div>
+  <div class="module-title">Diagnostics</div>
+  <div class="module-desc">Systematic diagnosis on this unit means tracing the signal path in order — don't skip layers. Electrical supply → interlock conditions → PDM relay → downstream device. Every time.</div>
+
+  <div class="objectives-box">
+    <div class="objectives-label">By the end of this module you will</div>
+    <ul class="objectives-list">
+      <li>Use the electrical/hydraulic path to isolate faults in the correct order</li>
+      <li>Know what to verify at each level before moving to the next</li>
+      <li>Understand rotary joint and slip ring inspection points</li>
+      <li>Know the correct manual lowering/stowing sequence</li>
+    </ul>
+  </div>
+
+  <h2>Diagnostic Sequence — Use This Every Time</h2>
+  <ol class="step-list">
+    <li><strong>Verify interlock conditions are satisfied.</strong> Park brake set. Transmission in neutral. All outrigger switches making. PTO engaged. If any condition is not met, nothing downstream will work.</li>
+    <div class="tells-you">Most "no function" complaints are resolved at this step. Do not skip it to look clever — it saves time.</div>
+    <li><strong>Confirm the aerial device/outrigger selector valve is in the correct mode.</strong> Aerial device mode is de-energized (default). Confirm with the tailshelf selector switch position.</li>
+    <div class="tells-you">Selector stuck in outrigger mode = boom dead, outriggers work. Stuck in aerial mode = outriggers won't work from ground controls.</div>
+    <li><strong>Check standby pressure at the PD test port on the lower control valve.</strong> Spec is 475–500 psi with all functions off and aerial device selector active. Correct standby with no function = downstream problem. No standby = pump or load-sense circuit.</li>
+    <div class="tells-you">Before servicing the pump, close both shutoff valves: suction line valve (reservoir to pump) and return line valve (near return port or return line filter).</div>
+    <li><strong>For a specific function failure, verify the electrical command signal to that spool's solenoid.</strong> Is the command reaching the solenoid? Does the solenoid coil have correct resistance?</li>
+    <div class="tells-you">Solenoid coil resistance test: measure across the solenoid terminals with power off. An open reading (infinite resistance) = failed coil. Short (near zero) = shorted coil. Either requires replacement.</div>
+    <li><strong>If electrical checks pass, test holding valve function per the manual.</strong> Load the cylinder, disengage PTO, shift lever. No movement = holding valve good. Slow drift = holding valve leak.</li>
+    <div class="tells-you">A leaking holding valve on a boom or elevator cylinder is a safety issue — do not return to service until corrected.</div>
+  </ol>
+
+  <h2>Rotary Joint and Slip Ring Inspection</h2>
+  <p>The rotary joint is a common wear point on high-hour units. At the same time, the slip ring (mounted at the bottom of the rotary joint) carries all electrical signals through the turntable rotation axis.</p>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">Rotary Joint Removal — Key Points <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <ol class="step-list">
+        <li>Position the unit on level surface, park brake applied, wheels chocked. Engage PTO and set outriggers.</li>
+        <li>Disconnect the two slip ring connectors inside the turntable and the connector in the pedestal. Do not cut any wires — connectors will pass through the bore once disconnected.</li>
+        <li>Disconnect all hydraulic hoses from the rotary joint. Cap or plug all open ports immediately.</li>
+        <li>Remove cap screws securing the restraint bracket to the rotary joint and pedestal.</li>
+        <li>Remove cap screws mounting the inner core to the mounting plate. Remove the rotary joint/slip ring assembly.</li>
+      </ol>
+      <div class="callout callout-warn" style="margin-top:10px">
+        <strong>Debris Warning</strong>
+        Do not allow debris to accumulate around the rotary joint — it can damage the connected hoses. Do not pressure wash the joint directly. After installation, operate each function five or six times to purge air.
+      </div>
+    </div>
+  </div>
+
+  <h2>Manual Lowering / Emergency Stow Sequence</h2>
+  <p>If the engine stops with the boom extended, the DC stowage pump provides limited hydraulic flow for stowing only. Follow this sequence exactly — order matters.</p>
+  <ol class="step-list">
+    <li><strong>Activate DC pump</strong> from turntable toggle switch or captive air system at upper controls.</li>
+    <li><strong>Rotate the turntable</strong> to a safe position if needed.</li>
+    <li><strong>Lower the upper boom</strong> to horizontal position.</li>
+    <li><strong>Lower the lower boom</strong> toward stow.</li>
+    <li><strong>Lower the lower elevator arm.</strong></li>
+    <li><strong>Lower the upper elevator arm.</strong></li>
+    <li><strong>Raise the outriggers</strong> once all boom components are stowed. Confirm 13' (3.96 m) travel height before moving the vehicle.</li>
+  </ol>
+  <div class="callout callout-danger">
+    <strong>DC Pump Limitation</strong>
+    The DC stowage pump produces under 2.5 GPM. Movements will be significantly slower than normal. Do not attempt to use this pump for any aerial work — stow only.
+  </div>
+
+  <h2>Hydraulic Oil Check — Conditions That Matter</h2>
+  <p>Oil level readings are only accurate when: all booms are stowed, all outriggers are retracted, and the vehicle is on level ground. Any other position will give a false reading. After adding oil, recheck under these conditions before releasing the unit.</p>
+  <p>If oil viscosity is not rated for the ambient temperature, it will cavitate the pump on cold starts — destroying the pump quickly. Match oil viscosity to your operating temperature range. Replace the filler breather cap and clean the suction strainer every oil change.</p>
+
+  <div class="quiz-section">
+    <div class="quiz-label">⚡ Knowledge Check</div>
+    <div class="quiz-question">You are doing a post-repair hydraulic oil level check. The boom is partially raised and the vehicle is on a slight slope. The dipstick reads at the correct mark. Is this a valid reading?</div>
+    <div class="quiz-options" id="opts-q5">
+      <div class="quiz-option" data-qid="q5" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">A</span> Yes — the dipstick mark accounts for boom position</div>
+      <div class="quiz-option" data-qid="q5" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">B</span> Yes — within the normal operating range, position doesn't affect the reading</div>
+      <div class="quiz-option" data-qid="q5" data-correct="true" onclick="checkAnswer(this)"><span class="quiz-option-letter">C</span> No — oil level must be checked with all booms fully stowed, outriggers retracted, and vehicle on level ground. Any other condition gives an inaccurate reading.</div>
+      <div class="quiz-option" data-qid="q5" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">D</span> No — but only the slope matters; boom position is irrelevant to the reading</div>
+    </div>
+    <div class="quiz-hint" id="hint-q5">✗ Not right — try again</div>
+    <div class="quiz-feedback correct-fb" id="q5-correct">✓ Correct. The maintenance manual is explicit: oil level must be checked with all booms stowed, outriggers retracted, and vehicle level. Boom position changes the volume of oil in the cylinders vs. the reservoir — a raised boom shifts oil into cylinder rods, making the reservoir read lower than actual fill. Both conditions (boom position AND vehicle level) affect the reading.</div>
+    <div class="quiz-feedback wrong-fb" id="q5-wrong">Both the boom position and vehicle level matter. When the boom is raised, oil fills the extended cylinders — less stays in the reservoir, so the reservoir reads low even when filled correctly. The manual specifies: all booms stowed, outriggers retracted, vehicle level. All three conditions must be met for an accurate reading.</div>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(4)">Mark Complete</button>
+  <button class="btn-nav" onclick="showModule(5)">Next: Scenarios →</button>
+  <button class="btn-restart" onclick="restartModule(4)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 5: TROUBLESHOOTING SCENARIOS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-5">
+  <div class="module-tag">Module 06 · Applied</div>
+  <div class="module-title">Troubleshooting Scenarios</div>
+  <div class="module-desc">Real complaints. Real diagnostic paths. Work through each one like you're standing next to the unit. The goal isn't to memorize the answer — it's to build the thinking pattern.</div>
+
+  <div class="objectives-box">
+    <div class="objectives-label">Diagnostic Framework — Use Every Time</div>
+    <ul class="objectives-list">
+      <li>Reproduce the fault before touching anything</li>
+      <li>Verify interlock conditions before reaching for a meter</li>
+      <li>Isolate to system (electrical / hydraulic / chassis)</li>
+      <li>Trace the circuit — don't guess at components</li>
+      <li>Verify with measurement — don't assume</li>
+    </ul>
+  </div>
+
+  <!-- SCENARIO 1 -->
+  <div class="scenario open" id="sc1">
+    <div class="scenario-header" onclick="toggleScenario('sc1')">
+      <div class="scenario-title-wrap">
+        <div class="scenario-tag">Scenario 01 · Electrical</div>
+        <div class="scenario-name">PTO Won't Engage — Switch Pressed, Nothing Happens</div>
+      </div>
+      <span class="scenario-chevron">▼</span>
+    </div>
+    <div class="scenario-body">
+      <h4>Symptoms</h4>
+      <ul class="symptom-list">
+        <li>PTO switch pressed — no engagement</li>
+        <li>Engine stays at idle, no throttle response</li>
+        <li>No boom function</li>
+        <li>No audible PTO click or mechanical engagement</li>
+      </ul>
+      <h4>Step-by-Step Diagnosis</h4>
+      <ol class="step-list">
+        <li><strong>Confirm both interlock conditions are met:</strong> Park brake set AND transmission in neutral.</li>
+        <div class="tells-you">PTO won't engage in gear. PTO won't engage without park brake. These are not optional — confirm both before going deeper. The Allison transmission must be in neutral to accept the PTO enable request.</div>
+        <li><strong>Check whether the PTO switch signal is reaching the PDM.</strong> Is wire F33 (14 AWG RED, TB11-9) receiving the PTO/clutch output when commanded?</li>
+        <div class="tells-you">No output at TB11-9 when conditions are met = the PDM PTO Card (650-50003) is not producing output. Verify the card is correctly configured for the Allison 3K/4K series (Jumpers J1/J2/J3 per schematic).</div>
+        <li><strong>If PTO Card output is present,</strong> check the signal path to the Allison via PTO circuits 112, 114, 117, 118, 155, 161 per the schematic.</li>
+        <div class="tells-you">PDM outputting correctly but Allison not responding = PTO signal path to the Allison transmission is broken or the transmission-side interface has a fault. This crosses into chassis territory.</div>
+        <li><strong>If PTO engages mechanically but engine won't throttle,</strong> check the throttle card output (650-50015). Remote PTO Set Speed 1 is programmed at 875 RPM per the schematic.</li>
+        <div class="tells-you">PTO on, boom interlocks met, but engine at idle = throttle card not commanding RPM. Per the schematic, the throttle card for this unit is 650-50015. Verify it is the correct card for the Cummins L9 / this configuration before replacing it.</div>
+      </ol>
+      <h4>Decision Tree</h4>
+      <div class="dtree">
+        <div class="dtree-title">PTO Won't Engage</div>
+        <div class="dtree-node"><div class="dtree-line">├─</div><div class="dtree-q">Park brake set AND transmission in neutral? <span class="dtree-yes">YES→</span><span class="dtree-no"> NO→</span></div></div>
+        <div class="dtree-indent"><div class="dtree-result-bad">Satisfy both interlock conditions first — PTO will not engage without them</div></div>
+        <div class="dtree-node"><div class="dtree-line">├─</div><div class="dtree-q">F33 output active at TB11-9? <span class="dtree-yes">YES→</span><span class="dtree-no"> NO→</span></div></div>
+        <div class="dtree-indent"><div class="dtree-result-bad">PTO Card not producing output — check card configuration (jumpers J1/J2/J3)</div></div>
+        <div class="dtree-node"><div class="dtree-line">├─</div><div class="dtree-q">PTO signal reaching Allison? <span class="dtree-yes">YES→</span><span class="dtree-no"> NO→</span></div></div>
+        <div class="dtree-indent"><div class="dtree-result-bad">PTO circuit path broken between PDM and Allison — trace circuits 112/114/117/118/155/161</div></div>
+        <div class="dtree-node"><div class="dtree-line">└─</div><div class="dtree-q">PTO engaged, engine throttles? <span class="dtree-yes">YES→ Normal</span><span class="dtree-no"> NO→ Throttle card fault</span></div></div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans1')">▶ Show Root Cause Summary</button>
+      <div class="answer-reveal" id="ans1">
+        <strong>Root Cause Priority Order</strong>
+        1) Interlock conditions not satisfied (park brake / neutral) — most common. 2) PTO Card jumper configuration mismatch for Allison 3K/4K. 3) Signal path fault between PDM TB11-9 and Allison. 4) Throttle card issue (wrong version for Cummins L9, or output fault). 5) Mechanical PTO engagement failure — outside PDM scope.
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 2 -->
+  <div class="scenario" id="sc2">
+    <div class="scenario-header" onclick="toggleScenario('sc2')">
+      <div class="scenario-title-wrap">
+        <div class="scenario-tag">Scenario 02 · Hydraulic</div>
+        <div class="scenario-name">No Boom Function — PTO On, Outriggers Down, Pump Running</div>
+      </div>
+      <span class="scenario-chevron">▼</span>
+    </div>
+    <div class="scenario-body">
+      <h4>Symptoms</h4>
+      <ul class="symptom-list">
+        <li>PTO engaged, engine at correct RPM</li>
+        <li>Main pump is running (audible/felt)</li>
+        <li>All outriggers appear to be fully extended</li>
+        <li>Zero boom or elevator movement from any control</li>
+      </ul>
+      <h4>Step-by-Step Diagnosis</h4>
+      <ol class="step-list">
+        <li><strong>Individually verify each outrigger switch is activating.</strong> "Down" visually is not the same as "switch made." Each leg has its own switch.</li>
+        <div class="tells-you">One leg 90% extended might not have reached its switch actuation point. All switches must make. Probe or observe each switch individually.</div>
+        <li><strong>Confirm the outrigger interlock solenoid is energized.</strong> Check for correct voltage at the solenoid with all outriggers confirmed down.</li>
+        <div class="tells-you">No voltage at interlock solenoid with all switches confirmed = interlock control module fault or wiring break between module and solenoid.</div>
+        <li><strong>Confirm the aerial device/outrigger selector valve is in aerial device mode</strong> (de-energized). Check the tailshelf selector switch position.</li>
+        <div class="tells-you">Selector valve stuck in outrigger mode = oil is blocked from reaching the lower control valve. This is a hydraulic block, not an electrical fault — but caused by a solenoid issue.</div>
+        <li><strong>Check standby pressure at the pump compensator test port.</strong> Is the pump producing any pressure?</li>
+        <div class="tells-you">Correct standby present with zero function = load-sense signal to spools is not being generated. Pilot system or upper controls interlock trigger issue. No standby = pump or load-sense circuit fault.</div>
+      </ol>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans2')">▶ Show Root Cause Summary</button>
+      <div class="answer-reveal" id="ans2">
+        <strong>Root Cause Priority Order</strong>
+        1) One outrigger switch not making — most common. 2) Interlock solenoid not energized (wiring or module). 3) Selector valve in wrong mode. 4) Pilot system or blocking valve not opening for upper controls. 5) Pump not building standby pressure (pump or load-sense circuit fault).
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 3 -->
+  <div class="scenario" id="sc3">
+    <div class="scenario-header" onclick="toggleScenario('sc3')">
+      <div class="scenario-title-wrap">
+        <div class="scenario-tag">Scenario 03 · Hydraulic</div>
+        <div class="scenario-name">Cylinder Won't Hold Position — Slow Drift Under Load</div>
+      </div>
+      <span class="scenario-chevron">▼</span>
+    </div>
+    <div class="scenario-body">
+      <h4>Symptoms</h4>
+      <ul class="symptom-list">
+        <li>Boom or elevator slowly drifts down when lever is in neutral</li>
+        <li>Or: cylinder drifts on a loaded hold (winch, jib)</li>
+        <li>Other functions work normally</li>
+        <li>No visible external hydraulic leak</li>
+      </ul>
+      <div class="callout callout-danger">
+        <strong>Safety Issue</strong>
+        A holding valve that allows cylinder drift is a safety failure — do not return the unit to aerial service until corrected.
+      </div>
+      <h4>Step-by-Step Diagnosis</h4>
+      <ol class="step-list">
+        <li><strong>Identify which cylinder is drifting</strong> by loading each independently and observing over a few minutes.</li>
+        <div class="tells-you">Isolating to one cylinder narrows the cause to that cylinder's holding valves — not the pump or main circuit.</div>
+        <li><strong>Perform the holding valve test:</strong> Position the cylinder under load. Disengage PTO. Fully shift the manual lever for that function. Hold momentarily to allow oil flow to tank. If the cylinder does not move, the extend holding valve is OK. If it slowly retracts, the holding valve is leaking.</li>
+        <div class="tells-you">This test distinguishes a leaking holding valve from an internal cylinder bypass. If the holding valve test passes but the cylinder still drifts with PTO off and lever neutral, the cylinder has internal bypass.</div>
+        <li><strong>If the holding valve tests as leaking,</strong> determine whether it's contamination (debris in the valve seat) or wear. A cartridge valve can often be cleaned; a severely worn seat requires replacement.</li>
+        <li><strong>If the holding valve tests as good but drift continues,</strong> the cylinder piston seal is bypassing internally. The cylinder requires service.</li>
+      </ol>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans3')">▶ Show Root Cause Summary</button>
+      <div class="answer-reveal" id="ans3">
+        <strong>Root Cause Priority Order</strong>
+        1) Holding valve leaking (pilot operated check or counterbalance valve) — most common on high-hour units. 2) Debris lodged in holding valve seat — can be cleaned. 3) Internal cylinder piston seal bypass. Use the test procedure to distinguish valve from cylinder before disassembling either.
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 4 -->
+  <div class="scenario" id="sc4">
+    <div class="scenario-header" onclick="toggleScenario('sc4')">
+      <div class="scenario-title-wrap">
+        <div class="scenario-tag">Scenario 04 · Hydraulic</div>
+        <div class="scenario-name">Pump Cavitation and Noise After Hydraulic Repair</div>
+      </div>
+      <span class="scenario-chevron">▼</span>
+    </div>
+    <div class="scenario-body">
+      <h4>Symptoms</h4>
+      <ul class="symptom-list">
+        <li>Whining or unusual noise from pump immediately after hydraulic work</li>
+        <li>Spongey or inconsistent boom movement</li>
+        <li>Fluid temperature rising faster than normal</li>
+        <li>Fluid level checks out correct</li>
+      </ul>
+      <h4>Step-by-Step Diagnosis</h4>
+      <ol class="step-list">
+        <li><strong>Back off immediately — do not run the pump hard.</strong> A pump cavitating on air will sustain internal damage if loaded heavily.</li>
+        <div class="tells-you">Whining pump and spongey movement together after a repair = air in the suction side until proven otherwise. Treat it as that until you've checked every suction fitting.</div>
+        <li><strong>Inspect every suction-side fitting opened during the repair.</strong> A fitting not fully torqued will pull air under suction vacuum without leaking fluid under pressure.</li>
+        <div class="tells-you">This is the most commonly overlooked cause of post-repair cavitation. Even one slightly loose fitting on the suction side can introduce persistent air.</div>
+        <li><strong>Bleed the system:</strong> cycle all functions slowly and repeatedly at minimal load to work trapped air back to the reservoir.</li>
+        <li><strong>If cavitation noise continues after 10–15 minutes of slow cycling,</strong> there is still an active air entry point. Remove, inspect, and reinstall — don't just retighten.</li>
+      </ol>
+      <div class="callout callout-danger">
+        <strong>Don't Condemn the Pump</strong>
+        Post-repair cavitation is almost always air in the suction circuit — not pump damage. Replace the pump without fixing the air entry and the new pump will cavitate too.
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans4')">▶ Show Root Cause Summary</button>
+      <div class="answer-reveal" id="ans4">
+        <strong>Root Cause</strong>
+        Post-repair cavitation = air in suction circuit. Source: loose suction fitting (most common), low fluid after adding components back, or not pre-filling new components before installation. Resolution: torque all suction fittings, top off fluid, bleed slowly. Only evaluate the pump itself if cavitation persists after confirming an air-free suction circuit.
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 5 -->
+  <div class="scenario" id="sc5">
+    <div class="scenario-header" onclick="toggleScenario('sc5')">
+      <div class="scenario-title-wrap">
+        <div class="scenario-tag">Scenario 05 · Electrical</div>
+        <div class="scenario-name">DC Stowage Pump Inoperative — Boom Extended, Engine Down</div>
+      </div>
+      <span class="scenario-chevron">▼</span>
+    </div>
+    <div class="scenario-body">
+      <h4>Symptoms</h4>
+      <ul class="symptom-list">
+        <li>Engine stopped or PTO disengaged with boom elevated</li>
+        <li>DC stowage pump switch activated — no pump motor noise</li>
+        <li>OR: pump motor runs but boom doesn't retract</li>
+      </ul>
+      <div class="callout callout-danger">
+        <strong>Treat This as Urgent</strong>
+        If the boom is elevated and the stowage pump won't work, establish a safe lowering procedure per your company's protocols before beginning diagnosis.
+      </div>
+      <h4>Step-by-Step Diagnosis</h4>
+      <ol class="step-list">
+        <li><strong>Check vehicle battery state of charge.</strong> The DC pump motor draws significant current — a discharged battery will produce weak or no pump output that looks like a failed motor.</li>
+        <div class="tells-you">Low battery is the fastest thing to check and the most commonly overlooked. If the truck has been sitting with the engine off, battery may not have enough charge to run the DC pump effectively.</div>
+        <li><strong>Confirm the PDM pump relay is energized</strong> when the stowage pump switch is activated. Check the PDM connector center screw is fully tightened.</li>
+        <div class="tells-you">The PDM relay is what sends power to the DC pump motor. If the relay isn't energized, no power reaches the motor regardless of battery state.</div>
+        <li><strong>Check DC pump motor wiring — power supply to pump and ground return.</strong></li>
+        <div class="tells-you">A high-resistance connection in the supply or ground path produces weak pump performance that looks exactly like a failing motor. Check voltage at the pump terminals under load.</div>
+        <li><strong>If motor runs but boom won't retract,</strong> the stowage control valve isn't opening. Check the valve solenoid wiring and command signal.</li>
+      </ol>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans5')">▶ Show Root Cause Summary</button>
+      <div class="answer-reveal" id="ans5">
+        <strong>Root Cause Priority Order</strong>
+        1) Low battery voltage — most commonly overlooked. 2) PDM pump relay not energizing (check connector center screw). 3) High resistance in DC pump supply or ground wiring. 4) Valve solenoid command signal missing (motor runs, no movement). 5) DC pump motor failure. Work through in order — the motor itself rarely fails first.
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-label">⚡ Final Scenario Check</div>
+    <div class="quiz-question">All boom functions are uniformly slow. PTO is engaged, engine is at 1,200 RPM (Set Speed 2), and the main pump is running. What is the correct first check?</div>
+    <div class="quiz-options" id="opts-q6">
+      <div class="quiz-option" data-qid="q6" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">A</span> Replace the section pressure compensators on each control valve spool</div>
+      <div class="quiz-option" data-qid="q6" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">B</span> Replace the pump — internal wear is causing low flow</div>
+      <div class="quiz-option" data-qid="q6" data-correct="true" onclick="checkAnswer(this)"><span class="quiz-option-letter">C</span> Check hydraulic oil level (with all booms stowed, outriggers retracted, vehicle level), then check pump standby and working pressure before touching any valves or components</div>
+      <div class="quiz-option" data-qid="q6" data-correct="false" onclick="checkAnswer(this)"><span class="quiz-option-letter">D</span> Check the outrigger interlock solenoid — it may be partially energized</div>
+    </div>
+    <div class="quiz-hint" id="hint-q6">✗ Not right — try again</div>
+    <div class="quiz-feedback correct-fb" id="q6-correct">✓ Correct. All functions equally slow = problem is upstream of all valve spools. The first thing to verify is oil level (with correct conditions — booms stowed, outriggers retracted, vehicle level). Low oil causes slow/weak function. Then measure pump standby and working pressure. These two checks will tell you whether the issue is supply-side (oil/pump) before you open any valves.</div>
+    <div class="quiz-feedback wrong-fb" id="q6-wrong">Uniform slowness across all functions means the fault is upstream of all valves — the pump or its supply. Before replacing anything, check oil level under the correct conditions and measure pump standby pressure. Low oil level and low pump output are far more common causes of uniform slowness than section compensator or interlock issues.</div>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(5)">Mark Complete</button>
+  <button class="btn-nav" onclick="showModule(6)">Next: Quick Checks →</button>
+  <button class="btn-restart" onclick="restartModule(5)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 6: QUICK CHECKS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-6">
+  <div class="module-tag">Module 07 · Field Reference</div>
+  <div class="module-title">Quick Checks</div>
+  <div class="module-desc">Under 60 seconds each. Use these as your first pass on any complaint before diving into detailed diagnosis. Most faults are found here.</div>
+
+  <div class="callout callout-info">
+    <strong>How to Use This Section</strong>
+    Run these checks first on any complaint. Each one either points toward the problem or rules out a category. You'll often know which system is at fault before you open a schematic.
+  </div>
+
+  <h2>Interlock and Pre-Op Checks</h2>
+  <div class="qcheck-grid">
+    <div class="qcheck">
+      <div class="qcheck-icon">🅿</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">1. Park Brake + Neutral — Both Confirmed?</div>
+        <div class="qcheck-desc">Physically confirm park brake is fully engaged AND transmission is in neutral before attempting PTO engagement.</div>
+        <div class="qcheck-points">PTO will not engage with either condition missing. Most "PTO won't engage" calls end here.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">🦵</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">2. All Four Outrigger Switches — Individually Confirmed</div>
+        <div class="qcheck-desc">An outrigger that appears down may not have reached its switch actuation point. Verify each leg's switch is individually making.</div>
+        <div class="qcheck-points">One switch not making = zero boom function. This is the #1 cause of "boom dead, PTO on" complaints on this unit.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">🔄</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">3. Aerial Device / Outrigger Selector Mode</div>
+        <div class="qcheck-desc">Confirm the tailshelf selector switch is in the correct mode for the intended operation (aerial device = de-energized default).</div>
+        <div class="qcheck-points">Selector in wrong mode = one entire circuit blocked. Boom dead but outriggers work = selector stuck in outrigger mode.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">🔌</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">4. PDM Connector Center Screw</div>
+        <div class="qcheck-desc">Confirm the PDM connector (970138202) center screw is fully tightened. This connector does not make proper contact until the screw is fully seated.</div>
+        <div class="qcheck-points">Loose center screw causes intermittent failures that look like module faults. Common post-service miss.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Hydraulic Quick Checks</h2>
+  <div class="qcheck-grid">
+    <div class="qcheck">
+      <div class="qcheck-icon">🛢️</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">5. Hydraulic Oil Level — Correct Conditions</div>
+        <div class="qcheck-desc">Check reservoir with all booms stowed, outriggers retracted, vehicle on level ground. Inspect color and clarity at the same time.</div>
+        <div class="qcheck-points">Low fluid = slow or weak function. Milky = water contamination. Dark with grit = contamination event. Fix fluid condition before further diagnosis.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">💧</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">6. Main Pump — Is It Actually Running?</div>
+        <div class="qcheck-desc">Put your hand on the main pump housing when a boom function is commanded. You should feel vibration and hear it load.</div>
+        <div class="qcheck-points">No vibration = pump not running. Trace back through PTO engagement before blaming a hydraulic component.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">📊</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">7. Pump Standby Pressure</div>
+        <div class="qcheck-desc">Connect a gauge to the pump compensator test port. With PTO on and no function commanded, read standby.</div>
+        <div class="qcheck-points">Correct standby with no function = downstream problem (valve, solenoid, interlock). No standby = pump or load-sense fault. This split takes 2 minutes and saves hours.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">🔩</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">8. Holding Valve Quick Test</div>
+        <div class="qcheck-desc">Load the suspect cylinder. Disengage PTO. Fully shift the manual lever. No movement = holding valve good. Slow retraction = holding valve leaking.</div>
+        <div class="qcheck-points">Do not return to service with a leaking holding valve on any load-bearing cylinder.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Electrical Quick Checks</h2>
+  <div class="qcheck-grid">
+    <div class="qcheck">
+      <div class="qcheck-icon">⚡</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">9. Slip Ring Connectors</div>
+        <div class="qcheck-desc">If any turntable-mounted function or upper controls behave intermittently, inspect the two slip ring connectors inside the turntable for corrosion or loose pins.</div>
+        <div class="qcheck-points">Worn or corroded slip ring contacts cause intermittent upper control failures and DC pump control issues that look like module faults.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">🔋</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">10. Battery Charge State — Before Running DC Pump</div>
+        <div class="qcheck-desc">Before activating the emergency DC stowage pump, check battery voltage. The DC pump draws significant current.</div>
+        <div class="qcheck-points">Low battery = weak pump output that looks like a failed motor. Charge or jump before condemning the DC pump motor.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">🔁</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">11. Rotary Joint — Debris and Hose Routing</div>
+        <div class="qcheck-desc">Inspect the rotary joint area for debris accumulation and verify no hoses are kinked or rubbing against the joint housing.</div>
+        <div class="qcheck-points">Debris damage to hoses at the rotary joint is a slow failure that presents as intermittent hydraulic function. Inspect on any undiagnosed hydraulic complaint.</div>
+      </div>
+    </div>
+    <div class="qcheck">
+      <div class="qcheck-icon">🌡️</div>
+      <div class="qcheck-body">
+        <div class="qcheck-title">12. Hydraulic Oil Temperature</div>
+        <div class="qcheck-desc">If the system feels sluggish, check whether oil temperature is within range. Excessive heat degrades all functions and damages seals.</div>
+        <div class="qcheck-points">Common causes of excess heat: low oil level, restricted return line filter, pump running in bypass due to internal wear. Check oil level first.</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(6)">Mark Complete</button>
+  <button class="btn-nav" onclick="showModule(7)">Next: Flow Diagrams →</button>
+  <button class="btn-restart" onclick="restartModule(6)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 7: FLOW DIAGRAMS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-7">
+  <div class="module-tag">Module 08 · Reference</div>
+  <div class="module-title">Flow Diagrams</div>
+  <div class="module-desc">Visual path diagrams for the four most important circuits on this unit. Use these when you need to trace a signal or flow path without opening the full schematic.</div>
+
+  <!-- FLOW 1 -->
+  <h2>Main Hydraulic Power Path</h2>
+  <div class="flow">
+    <div class="flow-title">Engine → PTO → Pump → Control Valves → Cylinders</div>
+    <div class="flow-row"><div class="flow-box">Cummins L9 engine running at PTO-engaged RPM</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Hotshift PTO engages on Allison 3000 Series — 161% ratio, left side orientation</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Requires: neutral + park brake + PTO switch<br><span style="font-size:11px">Any condition missing = PTO blocked</span></div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Variable displacement piston pump — 28.0 GPM @ 3,000 PSI rated</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Standby pressure test point<br><span style="font-size:11px">Correct standby = pump OK, fault is downstream</span></div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Aerial Device/Outrigger Selector Valve — routes to aerial device (default) or outrigger circuit</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Selector in wrong mode = one circuit blocked</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓ (aerial device mode)</div></div>
+    <div class="flow-row"><div class="flow-box">13.5 GPM → Lower Control Valve (3 boom spools + winch)</div></div>
+    <div class="flow-row"><div class="flow-box">11.0 GPM → Elevator Control Valve (2 elevator spools)</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓ (outrigger interlock solenoid must be energized)</div></div>
+    <div class="flow-row"><div class="flow-box">Load-sense signal from control valve → pump adjusts displacement to match demand</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Interlock solenoid de-energized = no LS signal = no working pressure</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Cylinders actuate via holding valves (pilot check or counterbalance)</div></div>
+  </div>
+
+  <!-- FLOW 2 -->
+  <h2>PTO Engagement Logic</h2>
+  <div class="flow">
+    <div class="flow-title">Cab Switch → PDM → Allison → Pump Running</div>
+    <div class="flow-row"><div class="flow-box">Park brake engaged + Transmission in neutral (both required)</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Either missing = PTO request blocked at PDM Card</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">PTO switch → PDM PTO Card (650-50003) evaluates interlock conditions</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Check jumpers J1/J2/J3 for Allison 3K/4K config</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">PDM TB11-9 output (F33 — 14 AWG RED) → PTO circuits 112, 114, 117, 118, 155, 161 → Allison</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">PTO hotshift engages → Throttle Card (650-50015) commands engine RPM</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Set Speed 1 = 875 RPM · Set Speed 2 = 1,200 RPM · Set Speed 3 = 1,200 RPM · PTO max = 1,400 RPM<br><span style="font-size:11px">Throttle card 650-50015 specified for this unit per schematic</span></div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Main pump at operating speed — all outrigger switches must now be made to enable boom functions</div></div>
+  </div>
+
+  <!-- FLOW 3 -->
+  <h2>Outrigger Interlock Path</h2>
+  <div class="flow">
+    <div class="flow-title">Leg Switches → Control Module → Solenoid → Load-Sense Path</div>
+    <div class="flow-row"><div class="flow-box">4 outrigger legs — each has its own interlock switch</div><div class="flow-arrow">→</div><div class="flow-box fail">★ One switch not making = interlock not satisfied</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓ (all switches confirmed)</div></div>
+    <div class="flow-row"><div class="flow-box">Interlock control module energizes the interlock solenoid in the lower control mounted control valve</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Load-sense signal path to pump opens → pump can now respond to demand from control valve spools</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Boom and elevator functions enabled</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Any leg raised = solenoid de-energizes instantly → boom stops</div></div>
+  </div>
+
+  <!-- FLOW 4 -->
+  <h2>Emergency Stow via DC Pump</h2>
+  <div class="flow">
+    <div class="flow-title">Engine Down → DC Pump → Stow Sequence</div>
+    <div class="flow-row"><div class="flow-box">Engine stops or PTO disengages — main pump no longer producing flow</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Check battery charge state — DC pump draws significant current</div><div class="flow-arrow">→</div><div class="flow-box fail">★ Low battery = weak or no pump output</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Activate DC pump: turntable toggle switch OR captive air system at upper controls</div><div class="flow-arrow">→</div><div class="flow-box fail">★ PDM relay must energize — check connector center screw</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">DC pump: fixed displacement, &lt; 2.5 GPM, battery powered — for stow only</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓ Follow sequence in order:</div></div>
+    <div class="flow-row"><div class="flow-box">① Rotate turntable → ② Lower upper boom → ③ Lower lower boom → ④ Lower lower elevator → ⑤ Lower upper elevator → ⑥ Raise outriggers</div></div>
+    <div class="flow-row"><div class="flow-arrow">↓</div></div>
+    <div class="flow-row"><div class="flow-box">Confirm 13' (3.96 m) travel height before moving vehicle</div></div>
+  </div>
+
+  <div class="callout callout-success">
+    <strong>Field Reference Complete</strong>
+    On any complaint: run the Quick Checks first, pick the right flow diagram, and trace from source to fault. Keep the original schematics alongside this guide for part numbers and circuit details not shown here.
+  </div>
+
+  <div style="margin-top:28px; padding:20px; background:var(--panel); border:1px solid var(--accent); border-radius:6px;">
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--accent); margin-bottom:6px;">Training Complete</div>
+    <p style="color:var(--muted); font-size:14px; margin-bottom:0;">8 modules complete. This file works offline — no internet required. For part numbers, circuit details, and procedures, always verify against Altec Electrical Schematic 990779284 Rev C, Hydraulic Schematic 990779285 Rev B, and Maintenance Manual 074920315.</p>
+    <p style="color:var(--muted); font-size:13px; margin-top:8px;">Score: <span id="finalScore" style="color:var(--accent3); font-family:'IBM Plex Mono',monospace;"></span></p>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(7)">Mark Complete</button>
+  <button class="btn-restart" onclick="restartModule(7)">↺ Restart This Module</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MODULE 8: ALTEC PROFESSOR -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="module" id="module-8">
+  <div class="module-tag">Module 09 · Altec Professor</div>
+  <div class="module-title">Altec Professor</div>
+  <div class="module-desc">Ready-to-use prompts for getting expert-level guidance on the AN67-E100 — written for the way a real field tech thinks.</div>
+
+  <div class="prof-intro">
+    <div class="prof-avatar">
+      <div class="prof-icon">🎓</div>
+      <div>
+        <div class="prof-name">Altec Professor</div>
+        <div class="prof-title">AN67-E100 · AA/AN Series Elevator · Systems Instructor</div>
+      </div>
+    </div>
+    <p>This app contains the system knowledge for the AN67-E100 — the PTO-driven variable displacement pump, load-sense hydraulic architecture, outrigger interlock system, pilot controls, elevator stow valve, DC emergency stowage pump, PDM wiring, and how all of it depends on each other.</p>
+    <p>Pair this app with an AI assistant and use the prompts below to ask better questions. The difference between a frustrating AI conversation and a useful one is how the question is framed. These prompts are built around <strong>this specific unit</strong> — not generic bucket truck content. They're written the way a senior tech thinks: in terms of systems, sequences, and cause-and-effect.</p>
+    <p>Use AI like an instructor who has read the same schematics and maintenance manual you have — not like a search engine. The more context you give it, the better the answer.</p>
+  </div>
+
+  <div class="prof-tip">Before you ask any question, know these three things: what the machine is doing, what it's not doing, and what you've already checked. That context turns a vague question into a real diagnostic conversation.</div>
+
+  <!-- SECTION A -->
+  <div class="prof-section">
+    <div class="prof-section-header">
+      <div class="prof-section-letter">A</div>
+      <div class="prof-section-title">Ask How It Works</div>
+    </div>
+    <div class="prof-section-desc">Understanding system interaction is the foundation of good diagnosis. Use these when you want the full picture — how signals flow, how systems depend on each other, what happens when one condition isn't met.</div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Using the systems in this app, walk me through how the Altec AN67-E100 transitions from engine-off to full boom operation. Cover every system that has to do something — PTO engagement, park brake interlock, outrigger interlock, pilot system, load-sense pump, and control valve — before the boom can actually function."</div>
+      <div class="prompt-meta">Context: Understanding the full enable sequence end-to-end</div>
+      <div class="prompt-footer"><span class="prompt-tag">System Interaction</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain how the variable displacement pump on the AN67-E100 works in practice. I want to understand what 'load-sense' means, how the pump adjusts its displacement when a boom function is commanded versus when nothing is moving, and why standby pressure is a useful diagnostic measurement."</div>
+      <div class="prompt-meta">Context: Variable displacement pump and load-sense explained practically</div>
+      <div class="prompt-footer"><span class="prompt-tag">Hydraulic Architecture</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain the 13.5 GPM / 11.0 GPM hydraulic split on this unit. I want to understand: is this two pumps or one pump, why the flow is divided this way, what the lower control valve and elevator control valve each receive, and what happens when both are operated simultaneously."</div>
+      <div class="prompt-meta">Context: Flow split and simultaneous function operation</div>
+      <div class="prompt-footer"><span class="prompt-tag">Hydraulic Flow</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"This unit has two separate hydraulic power sources — explain the difference between the main PTO-driven pump and the secondary DC stowage pump. What does each one do, when does each one run, what happens if the main pump fails, and why can't the DC pump be used for aerial work?"</div>
+      <div class="prompt-meta">Context: Dual-pump architecture — a common source of confusion</div>
+      <div class="prompt-footer"><span class="prompt-tag">Pump Architecture</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain the outrigger interlock system on the AN67-E100. I want to understand how the individual leg switches work, what the interlock control module does with those signals, how the interlock solenoid in the lower control valve fits into the hydraulic circuit, and what exactly is blocked when one outrigger switch isn't made."</div>
+      <div class="prompt-meta">Context: Outrigger interlock from switches to hydraulic gate</div>
+      <div class="prompt-footer"><span class="prompt-tag">Interlock System</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain how the pilot pressure system works on the AN67-E100 upper controls. I want to understand where the 375 psi pilot supply comes from (set by the pilot pressure reducing valve per the maintenance manual), how moving the single handle control varies the pilot pressure output, how that signal travels down to the lower control valve, and what the blocking valve does and when it opens."</div>
+      <div class="prompt-meta">Context: Upper controls pilot system end-to-end</div>
+      <div class="prompt-footer"><span class="prompt-tag">Pilot System</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+  </div>
+
+  <div class="prof-divider"></div>
+
+  <!-- SECTION B -->
+  <div class="prof-section">
+    <div class="prof-section-header">
+      <div class="prof-section-letter">B</div>
+      <div class="prof-section-title">Ask What Could Cause This</div>
+    </div>
+    <div class="prof-section-desc">Symptom-first thinking. Use these when you have a complaint and want to understand all possible causes before testing — organized from most to least likely, split by system.</div>
+
+    <div class="prof-tip">The more specific you are about what IS working and what ISN'T, the better the AI can narrow down the cause. "No boom function" is less useful than "PTO on, all outriggers confirmed down, interlock solenoid energized, selector in aerial mode, pump running, no standby pressure."</div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"On the AN67-E100, PTO is engaged and all outriggers are down, but there is zero boom or elevator function. The main pump is running. List every possible cause in order from most to least likely — and for each one, tell me what I should measure or check to confirm or rule it out."</div>
+      <div class="prompt-meta">Context: No function with pump running — all possible causes</div>
+      <div class="prompt-footer"><span class="prompt-tag">No Function Fault</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"All boom and elevator functions on the AN67-E100 are uniformly slow. PTO is on, engine is at 1,200 RPM, and the main pump is running. List every possible cause of uniform slowness across all functions — and explain how to differentiate between an oil supply problem, a pump problem, and a pressure setting problem."</div>
+      <div class="prompt-meta">Context: All functions slow, not just one</div>
+      <div class="prompt-footer"><span class="prompt-tag">Hydraulic Performance</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"One specific boom function on the AN67-E100 is slow while all other functions work normally. The pump and other valves are fine. What are all the possible causes when a single function is affected? Include both electrical causes (solenoid signal, solenoid coil) and hydraulic causes (valve spool, section compensator, holding valve)."</div>
+      <div class="prompt-meta">Context: Single function slow, others normal</div>
+      <div class="prompt-footer"><span class="prompt-tag">Isolated Fault</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"After hydraulic repair on the AN67-E100, the pump runs hot and makes a whining noise. Fluid level is correct. What are all the possible causes of this post-repair behavior? I want to understand cavitation, suction air entry, and how a loose suction fitting can cause persistent noise without showing visible fluid leakage."</div>
+      <div class="prompt-meta">Context: Post-repair pump heat and noise</div>
+      <div class="prompt-footer"><span class="prompt-tag">Post-Repair</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"A boom cylinder on the AN67-E100 slowly drifts down when the lever is in neutral. Other functions are normal. What are all the possible causes — and how do I use the holding valve test procedure to determine whether this is a leaking holding valve or an internal cylinder bypass?"</div>
+      <div class="prompt-meta">Context: Cylinder drift — holding valve vs cylinder</div>
+      <div class="prompt-footer"><span class="prompt-tag">Cylinder Fault</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+  </div>
+
+  <div class="prof-divider"></div>
+
+  <!-- SECTION C -->
+  <div class="prof-section">
+    <div class="prof-section-header">
+      <div class="prof-section-letter">C</div>
+      <div class="prof-section-title">Ask Me to Walk You Through It</div>
+    </div>
+    <div class="prof-section-desc">Step-by-step diagnostic guidance. Use these when you want the AI to act as a diagnostic partner — telling you what to check, in what order, and what each result means for the next step.</div>
+
+    <div class="prof-tip">Treat the AI like a senior tech standing next to you. Tell it what you've already done. It should tell you what to do next — not repeat what you already tried.</div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Walk me through the fastest diagnostic path for a 'boom completely dead' complaint on the AN67-E100. PTO is engaged, park brake is set, and all outriggers appear to be down. At each step, tell me what I'm testing, what tool I need, what I'm looking for, and what each possible result tells me about where the fault is."</div>
+      <div class="prompt-meta">Context: No function — structured step-by-step</div>
+      <div class="prompt-footer"><span class="prompt-tag">Guided Diagnosis</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"I have PTO engaged, outriggers down, pump running, but zero hydraulic function. Walk me through how to decide in the fewest steps whether this is an electrical problem (interlock solenoid, selector valve, pilot signal) or a hydraulic problem (pump pressure, load-sense circuit, blocking valve). Tell me exactly what to check first and what each result tells me."</div>
+      <div class="prompt-meta">Context: Fastest electrical vs. hydraulic split</div>
+      <div class="prompt-footer"><span class="prompt-tag">System Isolation</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"The DC emergency stowage pump on the AN67-E100 isn't running when activated. Walk me through the diagnostic path from the activation switch to the pump motor. Tell me: what the PDM relay does, how to confirm it's energizing, what to check in the DC pump supply circuit, and how to distinguish between a relay problem, a wiring problem, and a motor problem."</div>
+      <div class="prompt-meta">Context: DC stowage pump inoperative — full diagnostic path</div>
+      <div class="prompt-footer"><span class="prompt-tag">DC Pump Diagnosis</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"After a hydraulic repair on the AN67-E100, I have pump noise and spongey boom movement. Walk me through the air purge procedure. Tell me what order to cycle the functions, how long to run each cycle, what I'm listening for to know air is leaving the system, and how I confirm the system is fully purged before putting the unit back in service."</div>
+      <div class="prompt-meta">Context: Post-repair air bleed procedure</div>
+      <div class="prompt-footer"><span class="prompt-tag">Hydraulic Procedure</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Walk me through how to perform the holding valve test on a boom cylinder that's drifting on the AN67-E100. Tell me how to load the cylinder, what to do with the PTO, how to shift the lever, what I'm watching for, and how to interpret the result — including how to distinguish a leaking holding valve from an internal cylinder bypass."</div>
+      <div class="prompt-meta">Context: Holding valve test procedure</div>
+      <div class="prompt-footer"><span class="prompt-tag">Test Procedure</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+  </div>
+
+  <div class="prof-divider"></div>
+
+  <!-- SECTION D -->
+  <div class="prof-section">
+    <div class="prof-section-header">
+      <div class="prof-section-letter">D</div>
+      <div class="prof-section-title">Challenge My Diagnosis</div>
+    </div>
+    <div class="prof-section-desc">Use these when you think you know the answer but want a second opinion before pulling parts. The best diagnostics are the ones that get challenged before the wrench comes out.</div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"My diagnosis on the AN67-E100 is that the lower control valve needs to be replaced because all boom functions are dead. PTO is on, pump is running, and outriggers are down. Challenge this diagnosis. What should I have verified before condemning the valve, and what specific finding would actually justify replacing the lower control valve?"</div>
+      <div class="prompt-meta">Context: Premature valve replacement — verify first</div>
+      <div class="prompt-footer"><span class="prompt-tag">Theory Check</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"I've diagnosed a post-repair pump noise issue on the AN67-E100 as a failed pump because the previous pump also ran hot. I've already replaced the pump once and the problem came back. Challenge this. What am I probably missing, and why does the problem recur if the pump isn't the root cause?"</div>
+      <div class="prompt-meta">Context: Repeat pump failure — find the real cause</div>
+      <div class="prompt-footer"><span class="prompt-tag">Theory Check</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"I'm about to replace the outrigger interlock control module because the outrigger interlock isn't satisfying even though all outriggers appear to be down. Challenge this decision. What should I verify about the individual outrigger leg switches before condemning the module, and what does a module fault actually look like versus a switch fault?"</div>
+      <div class="prompt-meta">Context: Interlock module replacement — verify switches first</div>
+      <div class="prompt-footer"><span class="prompt-tag">Theory Check</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+  </div>
+
+  <div class="prof-divider"></div>
+
+  <!-- SECTION E -->
+  <div class="prof-section">
+    <div class="prof-section-header">
+      <div class="prof-section-letter">E</div>
+      <div class="prof-section-title">Explain This Part / Signal / Circuit</div>
+    </div>
+    <div class="prof-section-desc">Deep dives on specific components. Use these when you encounter a part or term in the schematic that you want to fully understand before testing it.</div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain the aerial device / outrigger selector valve on the AN67-E100 like you're teaching a mechanic to use it for real troubleshooting. What is its de-energized state, what does it do when energized, where is it physically located, and what does a fault in this valve look like in the field?"</div>
+      <div class="prompt-meta">Context: Selector valve — location, behavior, fault symptoms</div>
+      <div class="prompt-footer"><span class="prompt-tag">Components</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain the rotary joint and slip ring assembly on this unit. I want to understand: what the rotary joint does hydraulically, what the slip ring does electrically, why they're mounted together, and what failure symptoms each one produces — including which symptoms overlap and how to differentiate them."</div>
+      <div class="prompt-meta">Context: Rotary joint and slip ring — roles and failure modes</div>
+      <div class="prompt-footer"><span class="prompt-tag">Components</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain how pilot operated check valves work on the AN67-E100. I want to understand why they're installed in cross-ported pairs, how oil to one work port pilots open the opposite check valve, and why this design allows free flow in but blocks return flow — and what exactly 'internal pilot piston' means in practice."</div>
+      <div class="prompt-meta">Context: Pilot operated check valves — practical understanding</div>
+      <div class="prompt-footer"><span class="prompt-tag">Hydraulic Components</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain the park brake relay modification on the AN67-E100. The E24 (18 AWG BLK) wire is moved from TB9-2 to relay terminal 85, with a jumper from terminal 86 to TB7-15 (IGN hot) and terminal 30 to TB7-12 (PTO/SW). Walk me through what this relay is doing in the circuit and what the intended behavior is versus what happens if the modification wasn't made."</div>
+      <div class="prompt-meta">Context: Park brake relay modification — purpose and behavior</div>
+      <div class="prompt-footer"><span class="prompt-tag">Electrical Modification</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-text">"Explain the elevator stow valve and stow alarm system on this unit. I want to understand: what the cross link switch does, how it activates the stow solenoid, what the pressure switch monitors, when the stow alarm triggers, and what I should check first if the elevator won't fully stow or the alarm stays on."</div>
+      <div class="prompt-meta">Context: Elevator stow valve and alarm — logic and diagnosis</div>
+      <div class="prompt-footer"><span class="prompt-tag">Components</span><button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button></div>
+    </div>
+  </div>
+
+  <div class="prof-divider"></div>
+
+  <div style="margin-top:32px; background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:20px;">
+    <h3 style="margin-bottom:10px; color:var(--white);">Getting the Most Out of This</h3>
+    <p style="font-size:14px; line-height:1.75; margin-bottom:10px;">Every prompt above is a starting point. After you get the first answer, keep going. The best diagnostic conversations are two-sided — push back, add more context, tell the AI what result you got, and ask what it means.</p>
+    <p style="font-size:14px; line-height:1.75; color:var(--muted); margin-bottom:0;">The other modules in this app are your reference. Come back here when you want to ask deeper questions. Use the two together: read the module, then use the AI to go further on the specific thing you don't understand yet.</p>
+  </div>
+
+  <button class="btn-complete" onclick="completeModule(8)">Mark Complete</button>
+  <button class="btn-restart" onclick="restartModule(8)">↺ Restart This Module</button>
+</div>
+
+</main>
+</div><!-- desktop-layout -->
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'altec_an67_v2';
+const TOTAL = 9;
+
+const MODULE_QUIZZES = {
+  0: ['q1'],
+  1: ['q2'],
+  2: ['q3'],
+  3: ['q4'],
+  4: ['q5'],
+  5: ['q6'],
+  6: [],
+  7: [],
+  8: []
+};
+
+const ALL_QUIZ_IDS = Object.values(MODULE_QUIZZES).flat();
+
+const completedModules = new Set();
+const answeredQuizzes  = new Set();
+
+// ─────────────────────────────────────────────────────────────
+// STORAGE
+// ─────────────────────────────────────────────────────────────
+function saveProgress(activeIdx) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      completedModules: Array.from(completedModules),
+      answeredQuizzes:  Array.from(answeredQuizzes),
+      activeModule:     activeIdx
+    }));
+  } catch(e) {}
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+}
+
+// ─────────────────────────────────────────────────────────────
+// QUIZ LOGIC
+// ─────────────────────────────────────────────────────────────
+function checkAnswer(el) {
+  const qId    = el.dataset.qid;
+  const correct = el.dataset.correct === 'true';
+  if (answeredQuizzes.has(qId)) return;
+
+  const container = document.getElementById('opts-' + qId);
+  const hint      = document.getElementById('hint-' + qId);
+  const correctFb = document.getElementById(qId + '-correct');
+  const wrongFb   = document.getElementById(qId + '-wrong');
+
+  if (correct) {
+    el.classList.add('correct');
+    container.querySelectorAll('.quiz-option').forEach(o => {
+      if (o !== el) { o.classList.remove('wrong'); o.classList.add('wrong-dismissed'); }
+    });
+    if (wrongFb)   wrongFb.classList.remove('show');
+    if (hint)      hint.classList.remove('show');
+    if (correctFb) correctFb.classList.add('show');
+    answeredQuizzes.add(qId);
+    updateScore();
+    saveProgress(currentModule());
+  } else {
+    el.classList.add('wrong');
+    if (hint)    hint.classList.add('show');
+    if (wrongFb) wrongFb.classList.add('show');
+    setTimeout(() => { el.classList.remove('wrong'); }, 1200);
+  }
+}
+
+function restoreQuizAnswer(qId) {
+  const container = document.getElementById('opts-' + qId);
+  const correctFb = document.getElementById(qId + '-correct');
+  const hint      = document.getElementById('hint-' + qId);
+  if (!container) return;
+  container.querySelectorAll('.quiz-option').forEach(o => {
+    if (o.dataset.correct === 'true') o.classList.add('correct');
+    else o.classList.add('wrong-dismissed');
+  });
+  if (correctFb) correctFb.classList.add('show');
+  if (hint)      hint.classList.remove('show');
+}
+
+// ─────────────────────────────────────────────────────────────
+// SCORE
+// ─────────────────────────────────────────────────────────────
+function updateScore() {
+  const count = answeredQuizzes.size;
+  const total = ALL_QUIZ_IDS.length;
+  const el = document.getElementById('scoreLabel');
+  if (el) el.textContent = count + '/' + total + ' ✓';
+  const fin = document.getElementById('finalScore');
+  if (fin) fin.textContent = count + ' / ' + total + ' questions correct';
+}
+
+// ─────────────────────────────────────────────────────────────
+// MODULE RESTART
+// ─────────────────────────────────────────────────────────────
+function restartModule(idx) {
+  const quizIds = MODULE_QUIZZES[idx] || [];
+  quizIds.forEach(qId => {
+    answeredQuizzes.delete(qId);
+    const container = document.getElementById('opts-' + qId);
+    if (container) {
+      container.querySelectorAll('.quiz-option').forEach(o => {
+        o.classList.remove('correct','wrong','wrong-dismissed','locked');
+        o.style.pointerEvents = '';
+      });
+    }
+    const cf = document.getElementById(qId + '-correct');
+    const wf = document.getElementById(qId + '-wrong');
+    const h  = document.getElementById('hint-' + qId);
+    if (cf) cf.classList.remove('show');
+    if (wf) wf.classList.remove('show');
+    if (h)  h.classList.remove('show');
+  });
+  completedModules.delete(idx);
+  clearCompletedUI(idx);
+  updateProgress();
+  updateScore();
+  window.scrollTo(0,0);
+  saveProgress(idx);
+}
+
+// ─────────────────────────────────────────────────────────────
+// MODULE COMPLETE
+// ─────────────────────────────────────────────────────────────
+function completeModule(idx) {
+  completedModules.add(idx);
+  applyCompletedUI(idx);
+  updateProgress();
+  saveProgress(idx);
+}
+
+// ─────────────────────────────────────────────────────────────
+// UI HELPERS
+// ─────────────────────────────────────────────────────────────
+function applyCompletedUI(idx) {
+  const btns = document.querySelectorAll('.btn-complete');
+  if (btns[idx]) { btns[idx].textContent = '✓ Completed'; btns[idx].classList.add('done'); btns[idx].disabled = true; }
+  const si = document.querySelector('.nav-item[data-module="'+idx+'"]');
+  if (si) { si.classList.add('completed'); si.querySelector('.nav-check').textContent = '✓'; }
+  const bi = document.querySelector('.bnav-item[data-bnav="'+idx+'"]');
+  if (bi) { bi.classList.add('completed'); bi.querySelector('.bnav-num').textContent = '✓'; }
+}
+
+function clearCompletedUI(idx) {
+  const btns = document.querySelectorAll('.btn-complete');
+  if (btns[idx]) { btns[idx].textContent = 'Mark Complete'; btns[idx].classList.remove('done'); btns[idx].disabled = false; }
+  const si = document.querySelector('.nav-item[data-module="'+idx+'"]');
+  if (si) { si.classList.remove('completed'); const c = si.querySelector('.nav-check'); if(c) c.textContent = idx+1; }
+  const bi = document.querySelector('.bnav-item[data-bnav="'+idx+'"]');
+  if (bi) { bi.classList.remove('completed'); const n = bi.querySelector('.bnav-num'); if(n) n.textContent = idx+1; }
+}
+
+function updateProgress() {
+  const pct = (completedModules.size / TOTAL) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = completedModules.size + '/' + TOTAL;
+}
+
+function currentModule() {
+  const a = document.querySelector('.module.active');
+  return a ? parseInt(a.id.replace('module-',''),10) : 0;
+}
+
+// ─────────────────────────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────────────────────────
+function showModule(idx) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.bnav-item').forEach(n => n.classList.remove('active'));
+  const mod = document.getElementById('module-'+idx);
+  if (mod) mod.classList.add('active');
+  const si = document.querySelector('.nav-item[data-module="'+idx+'"]');
+  if (si) si.classList.add('active');
+  const bi = document.querySelector('.bnav-item[data-bnav="'+idx+'"]');
+  if (bi) bi.classList.add('active');
+  window.scrollTo(0,0);
+  saveProgress(idx);
+}
+
+// ─────────────────────────────────────────────────────────────
+// COLLAPSE / EXPAND
+// ─────────────────────────────────────────────────────────────
+function toggleCollapse(headerEl) {
+  const parent = headerEl.closest('.collapsible');
+  if (parent) parent.classList.toggle('open');
+}
+
+function toggleScenario(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function toggleAnswer(id) {
+  const el = document.getElementById(id);
+  const btn = el ? el.previousElementSibling : null;
+  if (!el) return;
+  el.classList.toggle('show');
+  if (btn && btn.classList.contains('show-answer-btn')) {
+    btn.textContent = el.classList.contains('show') ? '▼ Hide Root Cause Summary' : '▶ Show Root Cause Summary';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// COPY PROMPT
+// ─────────────────────────────────────────────────────────────
+function copyPrompt(btn) {
+  const card = btn.closest('.prompt-card');
+  if (!card) return;
+  const text = card.querySelector('.prompt-text');
+  if (!text) return;
+  const raw = text.textContent.trim().replace(/^[""]/, '').replace(/[""]$/, '');
+  navigator.clipboard.writeText(raw).then(() => {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = raw;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────
+// GLOBAL RESET
+// ─────────────────────────────────────────────────────────────
+function resetProgress() {
+  if (!confirm('Reset ALL progress? This cannot be undone.')) return;
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  completedModules.clear();
+  answeredQuizzes.clear();
+  for (let i = 0; i < TOTAL; i++) clearCompletedUI(i);
+  ALL_QUIZ_IDS.forEach(qId => {
+    const c = document.getElementById('opts-'+qId);
+    if (c) c.querySelectorAll('.quiz-option').forEach(o => {
+      o.classList.remove('correct','wrong','wrong-dismissed','locked');
+      o.style.pointerEvents = '';
+    });
+    const cf = document.getElementById(qId+'-correct');
+    const wf = document.getElementById(qId+'-wrong');
+    const h  = document.getElementById('hint-'+qId);
+    if (cf) cf.classList.remove('show');
+    if (wf) wf.classList.remove('show');
+    if (h)  h.classList.remove('show');
+  });
+  updateProgress();
+  updateScore();
+  showModule(0);
+}
+
+// ─────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────
+(function init() {
+  const saved = loadProgress();
+  if (saved) {
+    (saved.completedModules || []).forEach(idx => { completedModules.add(idx); applyCompletedUI(idx); });
+    (saved.answeredQuizzes  || []).forEach(qId => { answeredQuizzes.add(qId);  restoreQuizAnswer(qId); });
+    updateProgress();
+    updateScore();
+    showModule(saved.activeModule ?? 0);
+  } else {
+    showModule(0);
+  }
+})();
+</script>
+</body>
+</html>
